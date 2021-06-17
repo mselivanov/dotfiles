@@ -4,6 +4,7 @@ export DKPI_VENV_ROOT=/c/venv/dkpi/
 export REPOSITORY_ROOT=/c/repo
 export GCLOUD_SDK_ROOT=/c/Programs/Google/Cloud\ SDK/google-cloud-sdk/
 export CLOUDSDK_PYTHON=${GCLOUD_SDK_ROOT}/platform/bundledpython/python.exe
+export PATH=${PATH}:${GCLOUD_SDK_ROOT}/bin
 
 # Set up ssh keys
 env=~/.ssh/agent.env
@@ -77,9 +78,12 @@ alias pws='python -m http.server 8000'
 
 # Google Cloud COmmands
 alias bq='bq.cmd'
+alias bqss='bq show --format prettyjson'
 
 # Project DKPI aliases
 export PRJ_DKPI_ROOT="${REPOSITORY_ROOT}/bayc-alec"
+export DKPI_PROD_PROJECT="bayer-ch-230109"
+export DKPI_DEV_PROJECT="bayer-ch-global-dev"
 alias cddk='cd ${PRJ_DKPI_ROOT}'
 alias dktest='${PRJ_DKPI_ROOT}/build/build.sh unittests'
 alias dkcov='${PRJ_DKPI_ROOT}/build/build.sh coverage'
@@ -87,3 +91,6 @@ alias dkbuild='${PRJ_DKPI_ROOT}/build/build.sh build'
 alias dkenv="source ${DKPI_VENV_ROOT}/Scripts/activate"
 alias dkroot="cd ${PRJ_DKPI_ROOT}"
 alias dkchg="cd ${PRJ_DKPI_ROOT}/dags/schema/changelog/"
+alias dkwai="gcloud config get-value project"
+alias dkprod="gcloud config set project ${DKPI_PROD_PROJECT}"
+alias dkdev="gcloud config set project ${DKPI_DEV_PROJECT}"
