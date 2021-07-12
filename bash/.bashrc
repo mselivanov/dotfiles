@@ -2,7 +2,7 @@
 # Env vars
 export DKPI_VENV_ROOT=/c/venv/dkpi/
 export REPOSITORY_ROOT=/c/repo
-export GCLOUD_SDK_ROOT=/c/Programs/Google/Cloud\ SDK/google-cloud-sdk/
+export GCLOUD_SDK_ROOT=/c/Programs/Google/CloudSDK/google-cloud-sdk/
 export CLOUDSDK_PYTHON=${GCLOUD_SDK_ROOT}/platform/bundledpython/python.exe
 export PATH=${PATH}:${GCLOUD_SDK_ROOT}/bin
 
@@ -95,3 +95,5 @@ alias dkwai="gcloud config get-value project"
 alias dkprod="gcloud config set project ${DKPI_PROD_PROJECT}"
 alias dkdev="gcloud config set project ${DKPI_DEV_PROJECT}"
 alias dkdeploy="${PRJ_DKPI_ROOT}/tools/toolbox/do.sh deploy"
+alias dklint="pylint --rcfile=${PRJ_DKPI_ROOT}/pylintrc ${PRJ_DKPI_ROOT}/src/digital_kpi"
+
