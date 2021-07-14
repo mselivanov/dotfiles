@@ -18,12 +18,10 @@ set nobackup
 set nowritebackup
 set noswapfile
 set nocompatible " Use Vim defaults (much better!), Vi is for 70's programmers!
-set viminfo='20,\"50 " read/write a .viminfo file, don't store more than 50 lines of registers - http://vim.wikia.com/wiki/Restore_cursor_to_file_position_in_previous_editing_session
 set ts=4 " tabstop - how many columns should the cursor move for one tab
 set sw=4 " shiftwidth - how many columns should the text be indented
 set expandtab " always expands tab to spaces. It is good when peers use different editor.
 set wrap " wraps longs lines to screen size
-win 260 92 " The window height
 set laststatus=2 " Show the status line even if only one file is being edited
 set ruler " Show ruler
 set go-=T " Removes the toolbar
