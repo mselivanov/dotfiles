@@ -81,7 +81,4 @@ source "$BASH_IT"/bash_it.sh
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-
-export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 export WORKON_HOME=~/.virtualenvs
-pyenv virtualenvwrapper_lazy

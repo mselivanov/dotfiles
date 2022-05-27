@@ -5,6 +5,11 @@ alias bq=bq
 alias bqss='bq show --format prettyjson'
 # Custom git aliases
 alias grls='gco master && gpl && gco release && gm master && gp'
+alias gblsa='git branch --list --all'
+alias gblsl='git branch --list'
+alias gblsr='git branch --list --remotes'
+
+
 
 # Project DKPI aliases
 export PRJ_DKPI_ROOT="${REPOSITORY_ROOT}/bayc-alec"
