@@ -6,73 +6,40 @@ case $- in
     *) return;;
 esac
 
+# Generic configuration 
+#------------------------------------------------
+if [[ -z "$XDG_RUNTIME_DIR" ]]; then
+  export XDG_RUNTIME_DIR=/run/user/$UID
+  if [[ ! -d "$XDG_RUNTIME_DIR" ]]; then
+    export XDG_RUNTIME_DIR=/tmp/$USER-runtime
+    if [[ ! -d "$XDG_RUNTIME_DIR" ]]; then
+      mkdir -m 0700 "$XDG_RUNTIME_DIR"
+    fi
+  fi
+fi
+
+
+# Bash It configuration
+#------------------------------------------------
 # Path to the bash it configuration
 export BASH_IT="/home/maksim/.bash_it"
-
-# Lock and Load a custom theme file.
-# Leave empty to disable theming.
-# location /.bash_it/themes/
 export BASH_IT_THEME='modern'
-
-# (Advanced): Change this to the name of your remote repo if you
-# cloned bash-it with a remote other than origin such as `bash-it`.
-# export BASH_IT_REMOTE='bash-it'
-
-# (Advanced): Change this to the name of the main development branch if
-# you renamed it or if it was changed for some reason
-# export BASH_IT_DEVELOPMENT_BRANCH='master'
 
 # Don't check mail when opening terminal.
 unset MAILCHECK
 
-# Set this to the command you use for todo.txt-cli
-export TODO="t"
-
 # Set this to false to turn off version control status checking within the prompt for all themes
 export SCM_CHECK=true
-# Set to actual location of gitstatus directory if installed
-#export SCM_GIT_GITSTATUS_DIR="$HOME/gitstatus"
-# per default gitstatus uses 2 times as many threads as CPU cores, you can change this here if you must
-#export GITSTATUS_NUM_THREADS=8
-
-# Set Xterm/screen/Tmux title with only a short hostname.
-# Uncomment this (or set SHORT_HOSTNAME to something else),
-# Will otherwise fall back on $HOSTNAME.
-#export SHORT_HOSTNAME=$(hostname -s)
-
-# Set Xterm/screen/Tmux title with only a short username.
-# Uncomment this (or set SHORT_USER to something else),
-# Will otherwise fall back on $USER.
-#export SHORT_USER=${USER:0:8}
-
-# If your theme use command duration, uncomment this to
-# enable display of last command duration.
-#export BASH_IT_COMMAND_DURATION=true
-# You can choose the minimum time in seconds before
-# command duration is displayed.
-#export COMMAND_DURATION_MIN_SECONDS=1
-
-# Set Xterm/screen/Tmux title with shortened command and directory.
-# Uncomment this to set.
-#export SHORT_TERM_LINE=true
-
-# Set vcprompt executable path for scm advance info in prompt (demula theme)
-# https://github.com/djl/vcprompt
-#export VCPROMPT_EXECUTABLE=~/.vcprompt/bin/vcprompt
-
-# (Advanced): Uncomment this to make Bash-it reload itself automatically
-# after enabling or disabling aliases, plugins, and completions.
-# export BASH_IT_AUTOMATIC_RELOAD_AFTER_CONFIG_CHANGE=1
-
-# Uncomment this to make Bash-it create alias reload.
-# export BASH_IT_RELOAD_LEGACY=1
-export DOCKER_SOCK=~/.docker/run/docker.sock
-export DOCKER_HOST="unix://${DOCKER_SOCK}"
 
 # Load Bash It
-source "$BASH_IT"/bash_it.sh
+source "${BASH_IT}/bash_it.sh"
+
+# Python tools configuration
+#------------------------------------------------
 # Pyenv init
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+# Virualenvs location
 export WORKON_HOME=~/.virtualenvs
