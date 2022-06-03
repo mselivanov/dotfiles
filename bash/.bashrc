@@ -43,3 +43,9 @@ eval "$(pyenv init -)"
 
 # Virualenvs location
 export WORKON_HOME=~/.virtualenvs
+
+# Starship configuration
+#------------------------------------------------
+# Starship init
+eval "$(starship init bash)"
+
