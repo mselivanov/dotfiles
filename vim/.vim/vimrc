@@ -1,7 +1,3 @@
-" Neovim specifics
-"
-if has('nvim') | let &viminfo .= '.nvim' | endif
-
 " 1. OS specific
 
 if ($OS == 'Windows_NT')
@@ -26,6 +22,7 @@ set sw=4 " shiftwidth - how many columns should the text be indented
 set expandtab " always expands tab to spaces. It is good when peers use different editor.
 set wrap " wraps longs lines to screen size
 set laststatus=2 " Show the status line even if only one file is being edited
+"set statusline=%b\ 0x%Bs
 set ruler " Show ruler
 set go-=T " Removes the toolbar
 " Make command line two lines high
