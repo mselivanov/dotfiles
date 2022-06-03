@@ -1,3 +1,6 @@
+" Neovim specifics
+"
+if has('nvim') | let &viminfo .= '.nvim' | endif
 
 " 1. OS specific
 
