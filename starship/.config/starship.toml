@@ -1,8 +1,13 @@
 format = """
-[────────────────────────────────────](bold cyan)
-$directory$git_branch
+${sudo}$directory$git_branch
 $python$gcloud 
 [>](bold cyan) """
 
+[python]
+symbol = " "
+
 [git_branch]
-symbol = "🌱 "
+symbol = " "
+
+[gcloud]
+format = 'on [$symbol${project} as $account@$domain]($style) '
