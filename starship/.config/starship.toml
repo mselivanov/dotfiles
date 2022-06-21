@@ -3,6 +3,8 @@ ${sudo}$directory$git_branch
 $python$gcloud 
 [>](bold cyan) """
 
+command_timeout = 1000
+
 [python]
 symbol = " "
 
