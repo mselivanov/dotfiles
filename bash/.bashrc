@@ -25,6 +25,9 @@ fi
 export BASH_IT="/home/maksim/.bash_it"
 export BASH_IT_THEME='modern'
 
+# Google Cloud configuration
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
 # Don't check mail when opening terminal.
 unset MAILCHECK
 
