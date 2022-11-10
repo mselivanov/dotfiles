@@ -22,7 +22,7 @@ fi
 # Bash It configuration
 #------------------------------------------------
 # Path to the bash it configuration
-export BASH_IT="/home/maksim/.bash_it"
+export BASH_IT="${HOME}/.bash_it"
 export BASH_IT_THEME='modern'
 
 # Google Cloud configuration
@@ -40,9 +40,9 @@ source "${BASH_IT}/bash_it.sh"
 # Python tools configuration
 #------------------------------------------------
 # Pyenv init
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# export PYENV_ROOT="$HOME/.pyenv"
+# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
 
 # Virualenvs location
 export WORKON_HOME=~/.virtualenvs
