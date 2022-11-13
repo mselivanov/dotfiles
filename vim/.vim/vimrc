@@ -6,7 +6,7 @@ if ($OS == 'Windows_NT')
     set shellcmdflag=/c
     au GUIEnter * simalt ~x
 else
-   set viminfo='10,\"100,:20,%,n~/.viminfo
+   " set viminfo='10,\"100,:20,%,n~/.viminfo
    set shell=/bin/bash
 endif
 
@@ -30,16 +30,17 @@ set ch=2
 
 " 3. Plugin setup
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()"
+call plug#begin()"
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'doums/darcula'
-
-call vundle#end()
+Plug 'doums/darcula'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'arcticicestudio/nord-vim'
+call plug#end()
 filetype plugin indent on
 
 " 4. Plugin settings
-colorscheme darcula
+" colorscheme darcula
+colorscheme nord 
 set termguicolors
 
 " 5. Cursor settings
@@ -73,3 +74,13 @@ map <C-K> <C-W>k<C-W>_
 map <C-H> <C-W>h<C-W>|
 map <C-L> <C-W>l<C-W>|
 map <C-=> <C-W>=
+
+" 7 Coc plugin settings 
+"~~~~~~~~~~~~~~~~~~~~~~~
+" Use Tab/S-Tab for completion navigation
+inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>
+" use <c-space>for trigger completion
+
+inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
