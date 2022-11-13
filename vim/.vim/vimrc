@@ -29,7 +29,6 @@ set go-=T " Removes the toolbar
 set ch=2
 
 " 3. Plugin setup
-set rtp+=~/.vim/bundle/Vundle.vim
 call plug#begin()"
 
 Plug 'doums/darcula'
