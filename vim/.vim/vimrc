@@ -16,7 +16,7 @@ syntax on
 set nobackup
 set nowritebackup
 set noswapfile
-set nocompatible " Use Vim defaults (much better!), Vi is for 70's programmers!
+set nocompatible " Use Vim defaults (much better!)
 set ts=4 " tabstop - how many columns should the cursor move for one tab
 set sw=4 " shiftwidth - how many columns should the text be indented
 set expandtab " always expands tab to spaces. It is good when peers use different editor.
@@ -29,13 +29,19 @@ set go-=T " Removes the toolbar
 set ch=2
 
 " 3. Plugin setup
-call plug#begin()"
+"let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+let data_dir = '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/bundle')
 
 Plug 'doums/darcula'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'arcticicestudio/nord-vim'
 call plug#end()
-filetype plugin indent on
 
 " 4. Plugin settings
 " colorscheme darcula
