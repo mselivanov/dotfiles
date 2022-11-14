@@ -41,11 +41,11 @@ call plug#begin('~/.vim/bundle')
 Plug 'doums/darcula'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'arcticicestudio/nord-vim'
+
 call plug#end()
 
 " 4. Plugin settings
-" colorscheme darcula
-colorscheme nord 
+silent! colorscheme nord 
 set termguicolors
 
 " 5. Cursor settings
