@@ -39,6 +39,8 @@ call plug#begin()"
 Plug 'doums/darcula'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'arcticicestudio/nord-vim'
+Plug 'vim-airline/vim-airline'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 filetype plugin indent on
