@@ -9,7 +9,9 @@ alias gblsa='git branch --list --all'
 alias gblsl='git branch --list'
 alias gblsr='git branch --list --remotes'
 
-
+# CLI tools aliases
+alias fd='fdfind'
+alias cat='batcat'
 
 # Project DKPI aliases
 export PRJ_DKPI_ROOT="${REPOSITORY_ROOT}/bayc-alec"

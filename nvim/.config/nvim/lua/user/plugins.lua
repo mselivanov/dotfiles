@@ -20,6 +20,9 @@ packer.startup(function(use)
 	'nvim-lualine/lualine.nvim', 
 	requires = { 'kyazdani42/nvim-web-devicons', opt = true, theme = 'nord'}
   }	
+  use { 'ibhagwan/fzf-lua',
+    requires = { 'kyazdani42/nvim-web-devicons' }
+  }
   use {'neoclide/coc.nvim', branch = 'release'}
   if install_plugins then
     packer.sync()
