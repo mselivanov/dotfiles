@@ -18,5 +18,5 @@ vim.api.nvim_set_keymap('n', '<C-P>',
     { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<C-S>',
-    "<cmd>lua require('fzf-lua').grep()<CR>",
+    '<cmd>lua require("fzf-lua").grep({rg_opts = "-uu"})<CR>',
     { noremap = true, silent = true })
