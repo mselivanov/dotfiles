@@ -1,5 +1,8 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["py", "yaml", "json"],
+  "coc.preferences.formatOnType": true,
+  "coc.preferences.formatOnSaveFiletypes": ["python", "yaml", "json"],
+  "python.venvPath": "${env:HOME}/.local/pipx/venvs/black",
   "python.linting.flake8Enabled": true,
-  "python.formatting.provider": "black"
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "${env:HOME}/.local/pipx/venvs/black/bin/black"
 }

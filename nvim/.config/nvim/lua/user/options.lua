@@ -25,7 +25,9 @@ set.updatetime = 250
 set.wildmenu = true
 set.wrap = true
 set.ch = 2
+vim.g.mapleader = ','
 vim.cmd([[
   filetype plugin indent on
   syntax on
 ]])
+
