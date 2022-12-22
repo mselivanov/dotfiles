@@ -1,8 +1,8 @@
-export REPOSITORY_ROOT=~/repo
+export REPOSITORY_ROOT="${HOME}/repo"
 
 # Google Cloud Commands
-alias bq=bq
 alias bqss='bq show --format prettyjson'
+
 # Custom git aliases
 alias grls='gco master && gpl && gco release && gpl && gm master && gp'
 alias gblsa='git branch --list --all'
@@ -12,6 +12,9 @@ alias gblsr='git branch --list --remotes'
 # CLI tools aliases
 alias fd='fdfind'
 alias cat='batcat'
+# Remove alias for lf from bash_it
+unalias lf
+
 
 # Project DKPI aliases
 export PRJ_DKPI_ROOT="${REPOSITORY_ROOT}/bayc-alec"
@@ -23,4 +26,3 @@ alias dkchg="cd ${PRJ_DKPI_ROOT}/cloud/changelog/"
 alias dkwai="gcloud config get-value project"
 alias dkprod="gcloud config set project ${DKPI_PROD_PROJECT}"
 alias dkdev="gcloud config set project ${DKPI_DEV_PROJECT}"
-alias dklint="pylint --rcfile=${PRJ_DKPI_ROOT}/pylintrc ${PRJ_DKPI_ROOT}/src/digital_kpi" 

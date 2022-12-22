@@ -18,6 +18,12 @@ if [[ -z "$XDG_RUNTIME_DIR" ]]; then
   fi
 fi
 
+if [[ "$(which nvim)" == "" ]]
+then
+  export EDITOR="vim"
+else
+  export EDITOR="nvim"
+fi
 
 # Bash It configuration
 #------------------------------------------------
