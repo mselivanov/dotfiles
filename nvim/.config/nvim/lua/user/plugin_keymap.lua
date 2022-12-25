@@ -77,3 +77,10 @@ vim.api.nvim_set_keymap('n', '<C-P>',
 vim.api.nvim_set_keymap('n', '<C-S>',
     '<cmd>lua require("fzf-lua").grep_project()<CR>',
     { noremap = true, silent = true })
+
+---------------------------------------------
+-- vim-surround keymap
+---------------------------------------------
+vim.api.nvim_set_keymap('n', 'dsf',
+    'ds)db',
+    { noremap = true, silent = true })

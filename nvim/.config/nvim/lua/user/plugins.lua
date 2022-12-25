@@ -24,6 +24,7 @@ packer.startup(function(use)
     requires = { 'kyazdani42/nvim-web-devicons' }
   }
   use {'neoclide/coc.nvim', branch = 'release'}
+  use 'tpope/vim-surround'
   if install_plugins then
     packer.sync()
   end
