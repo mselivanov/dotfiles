@@ -36,6 +36,16 @@ vim.cmd [[
 		augroup END
 ]]
 
+vim.api.nvim_create_autocmd({'FileType'}, {
+  pattern = "bash",
+  callback = function()
+    vim.lsp.start({
+      name = 'bash-language-server',
+      cmd = { 'bash-language-server', 'start' },
+    })
+  end,
+})
+
 -- Autoformat
 -- augroup _lsp
 --   autocmd!

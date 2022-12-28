@@ -219,6 +219,11 @@ _G.packer_plugins = {
     path = "/home/maksim/.local/share/nvim/site/pack/packer/start/project.nvim",
     url = "https://github.com/ahmedkhalf/project.nvim"
   },
+  ["sqls.nvim"] = {
+    loaded = true,
+    path = "/home/maksim/.local/share/nvim/site/pack/packer/start/sqls.nvim",
+    url = "https://github.com/nanotee/sqls.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/maksim/.local/share/nvim/site/pack/packer/start/telescope.nvim",
