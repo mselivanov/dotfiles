@@ -81,7 +81,7 @@ return packer.startup(function(use)
 	use { "jose-elias-alvarez/null-ls.nvim", branch = "main" } -- for formatters and linters
   use { "RRethy/vim-illuminate", branch = "master" }
   use { "nanotee/sqls.nvim", branch = "main" }
-
+  use { "lukas-reineke/lsp-format.nvim", branch = "master" }
 
 	-- Telescope
 	use { "nvim-telescope/telescope.nvim", branch = "master" }
