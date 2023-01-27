@@ -84,7 +84,10 @@ return packer.startup(function(use)
   use { "lukas-reineke/lsp-format.nvim", branch = "master" }
 
 	-- Telescope
-	use { "nvim-telescope/telescope.nvim", branch = "master" }
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+	use {"nvim-telescope/telescope.nvim", branch = "master" }
+  use {"nvim-telescope/telescope-live-grep-args.nvim", branch="master"}
+
 
 	-- Treesitter
 	use {

@@ -25,6 +25,13 @@ else
   export EDITOR="nvim"
 fi
 
+# Functions 
+#------------------------------------------------
+cleanup_nvim() {
+  rm -rf ~/.config/nvim
+  rm -rf ~/.local/share/nvim
+  rm -rf ~/.cache/nvim
+}
 # Bash It configuration
 #------------------------------------------------
 # Path to the bash it configuration

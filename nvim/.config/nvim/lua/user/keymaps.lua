@@ -74,3 +74,6 @@ keymap("n", "cv", "\"*p", opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
+-- SQL replace --
+keymap("v", "<leader>rp", ":s/[.:]/_/g<CR>:nohl<CR>", opts)
+--keymap("v", "<leader>ru", ':s/\\(\\"[a-zA-Z._]+\\"\\)/tgt.\\1 = src.\\1/g<CR>:nohl<CR>', opts)
