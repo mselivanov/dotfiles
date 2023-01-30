@@ -25,19 +25,15 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
--- Resize with arrows
-keymap("n", "<C-Up>", ":resize -2<CR>", opts)
-keymap("n", "<C-Down>", ":resize +2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+-- Resize with Alt 
+keymap("n", "<A-j>", ":resize +2<CR>", opts)
+keymap("n", "<A-k>", ":resize -2<CR>", opts)
+keymap("n", "<A-h>", ":vertical resize -2<CR>", opts)
+keymap("n", "<A-l>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
-
--- Move text up and down
-keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
-keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 
 -- Insert --
 -- Press jk fast to exit insert mode 
@@ -74,6 +70,6 @@ keymap("n", "cv", "\"*p", opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
--- SQL replace --
+-- SQL find and replace 
 keymap("v", "<leader>rp", ":s/[.:]/_/g<CR>:nohl<CR>", opts)
---keymap("v", "<leader>ru", ':s/\\(\\"[a-zA-Z._]+\\"\\)/tgt.\\1 = src.\\1/g<CR>:nohl<CR>', opts)
+keymap("v", "<leader>rd", ":s/\\(\\s*\\)\\(\\S\\+\\)\\(.\\{-}\\)\\(,\\?$\\)/\\1\\2\\4/g<CR>:nohl<CR>", opts)
