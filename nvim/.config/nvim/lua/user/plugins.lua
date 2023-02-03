@@ -87,7 +87,7 @@ return packer.startup(function(use)
   use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 	use {"nvim-telescope/telescope.nvim", branch = "master" }
   use {"nvim-telescope/telescope-live-grep-args.nvim", branch="master"}
-
+  use {"kiyoon/telescope-insert-path.nvim", branch="master"}
 
 	-- Treesitter
 	use {

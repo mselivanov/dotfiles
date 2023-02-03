@@ -73,3 +73,7 @@ keymap("n", "cv", "\"*p", opts)
 -- SQL find and replace 
 keymap("v", "<leader>rp", ":s/[.:]/_/g<CR>:nohl<CR>", opts)
 keymap("v", "<leader>rd", ":s/\\(\\s*\\)\\(\\S\\+\\)\\(.\\{-}\\)\\(,\\?$\\)/\\1\\2\\4/g<CR>:nohl<CR>", opts)
+-- Generate SQL MERGE UPDATE part from columns list
+keymap("v", "<leader>mu", ":s/\\(\\s*\\)\\(\"\\?\\w\\+\"\\?\\)\\(,\\?\\)\\(\\s\\+\\)\\($\\)/\\1tgt.\\2 = src.\\2\\3\\5/g<CR>:nohl<CR>", opts)
+-- Generate SQL MERGE VALUES part from columns list
+keymap("v", "<leader>mv", ":s/\\(\\s*\\)\\(\"\\?\\w\\+\"\\?\\)\\(,\\?\\)\\(\\s\\+\\)\\($\\)/\\1src.\\2\\3\\5/g<CR>:nohl<CR>", opts)

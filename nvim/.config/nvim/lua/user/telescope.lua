@@ -3,7 +3,13 @@ if not status_ok then
   return
 end
 
+local status_ok, telescope_insert_path = pcall(require, "telescope_insert_path")
+if not status_ok then
+  return
+end
+
 local actions = require "telescope.actions"
+local path_actions = require "telescope_insert_path"
 
 telescope.setup {
   defaults = {
@@ -85,6 +91,13 @@ telescope.setup {
         ["<PageDown>"] = actions.results_scrolling_down,
 
         ["?"] = actions.which_key,
+
+        ["["] = path_actions.insert_reltobufpath_visual,
+        ["]"] = path_actions.insert_abspath_visual,
+        ["{"] = path_actions.insert_reltobufpath_insert,
+        ["}"] = path_actions.insert_abspath_insert,
+        ["-"] = path_actions.insert_reltobufpath_normal,
+        ["="] = path_actions.insert_abspath_normal,
       },
     },
   },
