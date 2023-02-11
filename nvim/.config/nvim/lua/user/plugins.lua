@@ -56,6 +56,7 @@ return packer.startup(function(use)
   use { "lukas-reineke/indent-blankline.nvim", branch = "master" }
   use { "goolord/alpha-nvim", branch = "main" }
 	use {"folke/which-key.nvim"}
+	use {"tpope/vim-surround", branch="master"}
 
 	-- Colorschemes
   use { "folke/tokyonight.nvim", branch = "main" }
