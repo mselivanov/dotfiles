@@ -1,0 +1,4 @@
+export PROJECT_PATH="~/repo/ACC-MARS2CDP-DWH"
+export SESSION_NAME="ide"
+
+start_ide "${SESSION_NAME}" "${PROJECT_PATH}"

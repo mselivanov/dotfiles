@@ -25,6 +25,35 @@ else
   export EDITOR="nvim"
 fi
 
+# Functions 
+#------------------------------------------------
+cleanup_nvim() {
+  rm -rf ~/.config/nvim
+  rm -rf ~/.local/share/nvim
+  rm -rf ~/.cache/nvim
+}
+
+start_ide() {
+  local _session_name="$1"
+  local _project_path="$2"
+
+  tmux has-session -t ${_session_name} 2>/dev/null 
+  if [[ $? != 0 ]]
+  then
+    tmux new-session -s ${_session_name} -n nvim -d
+    tmux send-keys -t ${_session_name} "cd ${_project_path}" C-m
+    tmux send-keys -t ${_session_name} "$EDITOR ." C-m
+    tmux new-window -n console -t ${_session_name} 
+    tmux new-window -n files -t ${_session_name} 
+    tmux send-keys -t ${_session_name}:3 "ranger ." C-m
+  fi
+  tmux attach -t ${_session_name} 
+}
+
+workon() {
+  source "workon-$1"
+}
+
 # Bash It configuration
 #------------------------------------------------
 # Path to the bash it configuration
