@@ -57,6 +57,10 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
+-- Command mode --
+keymap("c", "<C-b>", "<Left>", opts)
+keymap("c", "<C-f>", "<Right>", opts)
+
 -- Clipboard operations --
 -- Copy and paste text to/from clipboard 
 keymap("v", "cc", "\"*y", opts)
