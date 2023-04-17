@@ -57,6 +57,7 @@ return packer.startup(function(use)
   use { "goolord/alpha-nvim", branch = "main" }
 	use {"folke/which-key.nvim"}
 	use {"tpope/vim-surround", branch="master"}
+	use {"wellle/targets.vim", branch="master"}
 
 	-- Colorschemes
   use { "folke/tokyonight.nvim", branch = "main" }
