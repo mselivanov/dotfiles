@@ -15,3 +15,5 @@ alias cat='batcat'
 # Remove alias for lf from bash_it
 unalias lf
 
+# Nvim aliases
+alias pde="NVIM_APPNAME=pde nvim"

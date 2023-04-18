@@ -58,3 +58,12 @@ export WORKON_HOME=${HOME}/.virtualenvs
 # Starship init
 eval "$(starship init bash)"
 
+
+# PDE 
+#------------------------------------------------
+# Redefine EDITOR to pde 
+
+if [[ "$(alias -p | grep pde)" != "" ]]
+then
+  export EDITOR="pde"
+fi
