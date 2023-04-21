@@ -5,7 +5,6 @@ return {
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			"nvim-telescope/telescope-file-browser.nvim",
 			"nvim-telescope/telescope-project.nvim",
-			"ahmedkhalf/project.nvim",
 			"cljoly/telescope-repo.nvim",
 			"stevearc/aerial.nvim",
 			"nvim-telescope/telescope-frecency.nvim",
@@ -147,6 +146,17 @@ return {
 					project = {
 						hidden_files = false,
 						theme = "dropdown",
+						base_dirs = {
+							"~",
+						},
+						hidden_files = true,
+						order_by = "asc",
+						search_by = "title",
+						sync_with_nvim_tree = true,
+						on_project_selected = function(prompt_bufnr)
+							local project_actions = require("telescope._extensions.project.actions")
+							project_actions.change_working_directory(prompt_bufnr)
+						end,
 					},
 				},
 			}
@@ -154,7 +164,6 @@ return {
 			telescope.load_extension("fzf")
 			telescope.load_extension("file_browser")
 			telescope.load_extension("project")
-			telescope.load_extension("projects")
 			telescope.load_extension("aerial")
 			telescope.load_extension("frecency")
 			telescope.load_extension("luasnip")
