@@ -5,9 +5,7 @@ return {
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			"nvim-telescope/telescope-file-browser.nvim",
 			"nvim-telescope/telescope-project.nvim",
-			"cljoly/telescope-repo.nvim",
 			"stevearc/aerial.nvim",
-			"nvim-telescope/telescope-frecency.nvim",
 			"aaronhallaert/advanced-git-search.nvim",
 			"benfowler/telescope-luasnip.nvim",
 			"olacin/telescope-cc.nvim",
@@ -19,13 +17,11 @@ return {
     keys = {
       { "<leader><space>", require("utils").find_files, desc = "Find Files" },
       { "<leader>ff", require("utils").find_files, desc = "Find Files" },
-      { "<leader>fo", "<cmd>Telescope frecency theme=dropdown previewer=false<cr>", desc = "Recent" },
       { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
       { "<leader>fr", "<cmd>Telescope file_browser<cr>", desc = "Browser" },
       { "<leader>fg", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", desc = "Live grep with args" },
       { "<leader>gc", "<cmd>Telescope conventional_commits<cr>", desc = "Conventional Commits" },
       { "<leader>zs", "<cmd>Telescope lazy<cr>", desc = "Search Plugins" },
-      { "<leader>ps", "<cmd>Telescope repo list<cr>", desc = "Search" },
       { "<leader>hs", "<cmd>Telescope help_tags<cr>", desc = "Search" },
       { "<leader>pp", function() require("telescope").extensions.project.project { display_type = "minimal" } end, desc = "List", },
       { "<leader>sw", "<cmd>Telescope live_grep<cr>", desc = "Workspace" },
@@ -165,7 +161,6 @@ return {
 			telescope.load_extension("file_browser")
 			telescope.load_extension("project")
 			telescope.load_extension("aerial")
-			telescope.load_extension("frecency")
 			telescope.load_extension("luasnip")
 			telescope.load_extension("conventional_commits")
 			telescope.load_extension("lazy")
@@ -175,15 +170,5 @@ return {
 	{
 		"stevearc/aerial.nvim",
 		config = true,
-	},
-	{
-		"ahmedkhalf/project.nvim",
-		config = function()
-			require("project_nvim").setup({
-				detection_methods = { "pattern", "lsp" },
-				patterns = { ".git" },
-				ignore_lsp = { "null-ls" },
-			})
-		end,
 	},
 }
