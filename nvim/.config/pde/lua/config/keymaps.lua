@@ -20,7 +20,7 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
--- Resize with Alt 
+-- Resize with Alt
 keymap("n", "<A-j>", ":resize +2<CR>", opts)
 keymap("n", "<A-k>", ":resize -2<CR>", opts)
 keymap("n", "<A-h>", ":vertical resize -2<CR>", opts)
@@ -29,10 +29,10 @@ keymap("n", "<A-l>", ":vertical resize +2<CR>", opts)
 -- Buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
-keymap("n", "<leader>bd", ":bdel!<CR>", opts)
+keymap("n", "<leader>qb", ":bdel!<CR>", opts)
 
 -- Insert --
--- Press jk fast to exit insert mode 
+-- Press jk fast to exit insert mode
 keymap("i", "jk", "<ESC>", opts)
 keymap("i", "kj", "<ESC>", opts)
 
@@ -61,10 +61,10 @@ keymap("c", "<C-b>", "<Left>", opts)
 keymap("c", "<C-f>", "<Right>", opts)
 
 -- Clipboard operations --
--- Copy and paste text to/from clipboard 
-keymap("v", "cc", "\"*y", opts)
-keymap("x", "cc", "\"*y", opts)
-keymap("n", "cv", "\"*p", opts)
+-- Copy and paste text to/from clipboard
+keymap("v", "cc", '"*y', opts)
+keymap("x", "cc", '"*y', opts)
+keymap("n", "cv", '"*p', opts)
 
 -- Terminal --
 -- Better terminal navigation
@@ -73,10 +73,20 @@ keymap("n", "cv", "\"*p", opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
--- SQL find and replace 
+-- SQL find and replace
 keymap("v", "<leader>rp", ":s/[.:]/_/g<CR>:nohl<CR>", opts)
 keymap("v", "<leader>rd", ":s/\\(\\s*\\)\\(\\S\\+\\)\\(.\\{-}\\)\\(,\\?$\\)/\\1\\2\\4/g<CR>:nohl<CR>", opts)
 -- Generate SQL MERGE UPDATE part from columns list
-keymap("v", "<leader>mu", ":s/\\(\\s*\\)\\(\"\\?\\w\\+\"\\?\\)\\(,\\?\\)\\(\\s\\+\\)\\($\\)/\\1tgt.\\2 = src.\\2\\3\\5/g<CR>:nohl<CR>", opts)
+keymap(
+	"v",
+	"<leader>mu",
+	':s/\\(\\s*\\)\\("\\?\\w\\+"\\?\\)\\(,\\?\\)\\(\\s\\+\\)\\($\\)/\\1tgt.\\2 = src.\\2\\3\\5/g<CR>:nohl<CR>',
+	opts
+)
 -- Generate SQL MERGE VALUES part from columns list
-keymap("v", "<leader>mv", ":s/\\(\\s*\\)\\(\"\\?\\w\\+\"\\?\\)\\(,\\?\\)\\(\\s\\+\\)\\($\\)/\\1src.\\2\\3\\5/g<CR>:nohl<CR>", opts)
+keymap(
+	"v",
+	"<leader>mv",
+	':s/\\(\\s*\\)\\("\\?\\w\\+"\\?\\)\\(,\\?\\)\\(\\s\\+\\)\\($\\)/\\1src.\\2\\3\\5/g<CR>:nohl<CR>',
+	opts
+)

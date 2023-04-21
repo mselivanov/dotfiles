@@ -23,7 +23,7 @@ return {
       { "<leader>fo", "<cmd>Telescope frecency theme=dropdown previewer=false<cr>", desc = "Recent" },
       { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
       { "<leader>fr", "<cmd>Telescope file_browser<cr>", desc = "Browser" },
-      { "<leader>fg", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", "Find with args" },
+      { "<leader>fg", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", desc = "Live grep with args" },
       { "<leader>gc", "<cmd>Telescope conventional_commits<cr>", desc = "Conventional Commits" },
       { "<leader>zs", "<cmd>Telescope lazy<cr>", desc = "Search Plugins" },
       { "<leader>ps", "<cmd>Telescope repo list<cr>", desc = "Search" },
