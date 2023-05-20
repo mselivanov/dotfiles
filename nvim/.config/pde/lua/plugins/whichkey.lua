@@ -63,7 +63,6 @@ return {
           b = { "Close Buffer" },
         },
 				a = { name = "+AI" },
-				b = { name = "+Buffer" },
 				d = { name = "+Debug" },
 				D = { name = "+Database" },
 				f = { name = "+File" },
@@ -73,6 +72,7 @@ return {
 				n = { name = "+Notes" },
 				p = { name = "+Project" },
 				t = { name = "+Test", N = { name = "Neotest" }, o = { "Overseer" } },
+				w = { name = "+Workspace" },
 				v = { name = "+View" },
 				z = { name = "+System" },
         -- stylua: ignore

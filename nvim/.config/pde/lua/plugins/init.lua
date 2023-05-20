@@ -59,6 +59,7 @@ return {
 		end,
 	},
 	{ "tpope/vim-surround", event = "BufReadPre" },
+	{ "tpope/vim-fugitive", event = "BufReadPre" },
 	{
 		"numToStr/Comment.nvim",
 		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
