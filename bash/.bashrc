@@ -2,27 +2,26 @@
 
 # If not running interactively, don't do anything
 case $- in
-  *i*) ;;
-    *) return;;
+*i*) ;;
+*) return ;;
 esac
 
-# Generic configuration 
+# Generic configuration
 #------------------------------------------------
 if [[ -z "$XDG_RUNTIME_DIR" ]]; then
-  export XDG_RUNTIME_DIR=/run/user/$UID
-  if [[ ! -d "$XDG_RUNTIME_DIR" ]]; then
-    export XDG_RUNTIME_DIR=/tmp/$USER-runtime
-    if [[ ! -d "$XDG_RUNTIME_DIR" ]]; then
-      mkdir -m 0700 "$XDG_RUNTIME_DIR"
-    fi
-  fi
+	export XDG_RUNTIME_DIR=/run/user/$UID
+	if [[ ! -d "$XDG_RUNTIME_DIR" ]]; then
+		export XDG_RUNTIME_DIR=/tmp/$USER-runtime
+		if [[ ! -d "$XDG_RUNTIME_DIR" ]]; then
+			mkdir -m 0700 "$XDG_RUNTIME_DIR"
+		fi
+	fi
 fi
 
-if [[ "$(which nvim)" == "" ]]
-then
-  export EDITOR="vim"
+if [[ "$(which nvim)" == "" ]]; then
+	export EDITOR="vim"
 else
-  export EDITOR="nvim"
+	export EDITOR="nvim"
 fi
 
 # Bash It configuration
@@ -57,13 +56,3 @@ export WORKON_HOME=${HOME}/.virtualenvs
 #------------------------------------------------
 # Starship init
 eval "$(starship init bash)"
-
-
-# PDE 
-#------------------------------------------------
-# Redefine EDITOR to pde 
-
-if [[ "$(alias -p | grep pde)" != "" ]]
-then
-  export EDITOR="pde"
-fi

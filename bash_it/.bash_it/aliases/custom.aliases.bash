@@ -20,8 +20,9 @@ if [[ "x$(which batcat 2>/dev/null)" != "x" ]]; then
 	alias cat='batcat'
 elif
 	[[ "x$(which bat 2>/dev/null)" != "x" ]]
-	alias cat='bat'
 then
+	alias cat='bat'
+else
 	alias cat='cat'
 fi
 # Remove alias for lf from bash_it
