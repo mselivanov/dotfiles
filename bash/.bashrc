@@ -56,3 +56,8 @@ export WORKON_HOME=${HOME}/.virtualenvs
 #------------------------------------------------
 # Starship init
 eval "$(starship init bash)"
+
+# ssh-agent start
+#------------------------------------------------
+# ssh-agent
+eval "$(ssh-agent -s)"
