@@ -17,6 +17,7 @@ require("lazy").setup({
 	spec = {
 		{ import = "base" },
 		{ import = "plugins" },
+		{ import = "pde" },
 	},
 	defaults = { lazy = true, version = nil },
 	install = { missing = true, colorscheme = { "nord" } },

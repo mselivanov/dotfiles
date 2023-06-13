@@ -1,4 +1,7 @@
 return {
+	features = {
+		base_dashboard = true,
+	},
 	pde = {
 		angular = false,
 		cpp = false,

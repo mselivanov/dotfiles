@@ -3,7 +3,8 @@ local opts = { noremap = true, silent = true }
 local term_opts = { silent = true }
 
 -- Shorten function name
-local keymap = vim.api.nvim_set_keymap
+-- local keymap = vim.api.nvim_set_keymap
+local keymap = vim.keymap.set
 
 -- Modes
 --   normal_mode = "n",
@@ -12,6 +13,28 @@ local keymap = vim.api.nvim_set_keymap
 --   visual_block_mode = "x",
 --   term_mode = "t",
 --   command_mode = "c",
+
+-- Remap for dealing with word wrap
+keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
+keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
+
+-- Better viewing
+keymap("n", "n", "nzzzv", { desc = "Next search match and center screen" })
+keymap("n", "N", "Nzzzv", { desc = "Previous search match and center screen" })
+keymap("n", "g,", "g,zvzz", { desc = "Next item in changelist and center screen" })
+keymap("n", "g;", "g;zvzz", { desc = "Previous in changelist and center screen" })
+
+-- Scrolling
+keymap("n", "<C-d>", "<C-d>zz", { desc = "Paste below" })
+keymap("n", "<C-u>", "<C-u>zz", { desc = "Paste below" })
+
+-- Paste
+keymap("n", "]p", "o<Esc>p", { desc = "Paste below" })
+keymap("n", "]P", "O<Esc>p", { desc = "Paste above" })
+
+-- Insert blank line
+keymap("n", "]<Space>", "o<Esc>", { desc = "Paste below" })
+keymap("n", "[<Space>", "O<Esc>", { desc = "Paste below" })
 
 -- Normal --
 -- Better window navigation
@@ -35,6 +58,15 @@ keymap("n", "<leader>qb", ":bdel!<CR>", opts)
 -- Press jk fast to exit insert mode
 keymap("i", "jk", "<ESC>", opts)
 keymap("i", "kj", "<ESC>", opts)
+
+-- Auto indent
+keymap("n", "i", function()
+	if #vim.fn.getline(".") == 0 then
+		return [["_cc]]
+	else
+		return "i"
+	end
+end, { expr = true })
 
 -- Visual --
 -- Stay in indent mode
@@ -66,12 +98,15 @@ keymap("v", "cc", '"*y', opts)
 keymap("x", "cc", '"*y', opts)
 keymap("n", "cv", '"*p', opts)
 
+-- Paste over currently selected text without yanking it
+keymap("v", "p", '"_dp')
+
 -- Terminal --
 -- Better terminal navigation
--- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
--- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
--- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
--- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
+keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
+keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
+keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- SQL find and replace
 keymap("v", "<leader>rp", ":s/[.:]/_/g<CR>:nohl<CR>", opts)

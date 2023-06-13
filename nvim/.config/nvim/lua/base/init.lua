@@ -1,7 +1,10 @@
 return {
+	-- Auxiliary functions: async, path, OS interaction
 	"nvim-lua/plenary.nvim",
+	-- UI library
 	"MunifTanjim/nui.nvim",
 	{
+		-- Icons
 		"nvim-tree/nvim-web-devicons",
 		dependencies = { "DaikyXendo/nvim-material-icon" },
 		config = function()
@@ -10,10 +13,14 @@ return {
 			})
 		end,
 	},
+	-- Collection of icons for plugins
 	{ "yamatsum/nvim-nonicons", config = true, enabled = false },
+	-- Enable repeating supported plugin maps with a dot
 	{ "tpope/vim-repeat", event = "VeryLazy" },
+	-- Peeking the line while entering line number in the command line
 	{ "nacro90/numb.nvim", event = "BufReadPre", config = true },
 	{
+		-- Show blankline indentation
 		"lukas-reineke/indent-blankline.nvim",
 		event = { "BufReadPost", "BufNewFile" },
 		opts = {
@@ -24,6 +31,7 @@ return {
 		},
 	},
 	{
+		-- Improve UI
 		"stevearc/dressing.nvim",
 		event = "VeryLazy",
 		opts = {
@@ -34,6 +42,7 @@ return {
 		},
 	},
 	{
+		-- Increment/decrement numbers, dates, booleans
 		"monaqa/dial.nvim",
 		keys = {
 			{ "<C-a>", mode = { "n", "v" } },
@@ -52,15 +61,19 @@ return {
     end,
 	},
 	{
+		-- Advanced matching
 		"andymass/vim-matchup",
 		event = { "BufReadPost" },
 		config = function()
 			vim.g.matchup_matchparen_offscreen = { method = "popup" }
 		end,
 	},
+	-- Delete/change parentheses, tags and else
 	{ "tpope/vim-surround", event = "BufReadPre" },
+	-- Git integration
 	{ "tpope/vim-fugitive", event = "BufReadPre" },
 	{
+		-- Comment plugin
 		"numToStr/Comment.nvim",
 		dependencies = { "JoosepAlviste/nvim-ts-context-commentstring" },
 		keys = { { "gc", mode = { "n", "v" } }, { "gcc", mode = { "n", "v" } }, { "gbc", mode = { "n", "v" } } },
