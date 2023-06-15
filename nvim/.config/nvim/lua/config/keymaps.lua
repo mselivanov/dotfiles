@@ -14,7 +14,9 @@ local keymap = vim.keymap.set
 --   term_mode = "t",
 --   command_mode = "c",
 
+--
 -- Remap for dealing with word wrap
+keymap("n", "<leader>ww", "<cmd>bufdo update!<CR>", { desc = "Save workspace" })
 keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 

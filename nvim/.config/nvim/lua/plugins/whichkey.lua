@@ -55,7 +55,6 @@ return {
 				},
 			})
 			wk.register({
-				w = { "<cmd>update!<CR>", "Save" },
         -- stylua: ignore
         q = { name = "Quit",
           q = { function() require("utils").quit() end, "Quit", },
