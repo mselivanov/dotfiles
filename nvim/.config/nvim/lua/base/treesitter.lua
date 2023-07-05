@@ -22,6 +22,7 @@ return {
 			"RRethy/nvim-treesitter-endwise",
 			"nvim-treesitter/playground",
 		},
+		branch = "master",
 		build = ":TSUpdate",
 		event = { "BufReadPost", "BufNewFile" },
 		opts = {

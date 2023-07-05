@@ -53,6 +53,7 @@ end
 function M.stack_overflow()
 	local buf = vim.api.nvim_get_current_buf()
 	file_type = vim.api.nvim_buf_get_option(buf, "filetype")
+  vim.ui.
 	vim.ui.input({ prompt = "so input: ", default = file_type .. " " }, function(input)
 		local cmd = ""
 		if input == "" or not input then

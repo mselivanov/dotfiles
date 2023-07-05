@@ -60,16 +60,18 @@ eval "$(starship init bash)"
 # ssh-agent start
 #------------------------------------------------
 # ssh-agent
-eval "$(ssh-agent -s)"
+if [[ ! -z ${SSH_AGENT_PID} ]]; then
+	if ps -p ${SSH_AGENT_PID} >/dev/null; then
+		echo "SSH Agent is already running. PID: ${SSH_AGENT_PID}"
+	else
+		eval "$(ssh-agent -s)"
+	fi
+else
+	eval "$(ssh-agent -s)"
+fi
 
 export PATH=${PATH}:/usr/local/go/bin
-if command -v zoxide > /dev/null; then
-  eval "$(zoxide init bash)"
+if command -v zoxide >/dev/null; then
+	eval "$(zoxide init bash)"
 fi
 . "$HOME/.cargo/env"
-# Source the Lazyman shell initialization for aliases and nvims selector
-# shellcheck source=.config/nvim-Lazyman/.lazymanrc
-[ -f ~/.config/nvim-Lazyman/.lazymanrc ] && source ~/.config/nvim-Lazyman/.lazymanrc
-# Source the Lazyman .nvimsbind for nvims key binding
-# shellcheck source=.config/nvim-Lazyman/.nvimsbind
-[ -f ~/.config/nvim-Lazyman/.nvimsbind ] && source ~/.config/nvim-Lazyman/.nvimsbind

@@ -15,8 +15,8 @@ local keymap = vim.keymap.set
 --   command_mode = "c",
 
 --
--- Remap for dealing with word wrap
 keymap("n", "<leader>ww", "<cmd>bufdo update!<CR>", { desc = "Save workspace" })
+-- Remap for dealing with word wrap
 keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 keymap("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 
@@ -27,8 +27,8 @@ keymap("n", "g,", "g,zvzz", { desc = "Next item in changelist and center screen"
 keymap("n", "g;", "g;zvzz", { desc = "Previous in changelist and center screen" })
 
 -- Scrolling
-keymap("n", "<C-d>", "<C-d>zz", { desc = "Paste below" })
-keymap("n", "<C-u>", "<C-u>zz", { desc = "Paste below" })
+keymap("n", "<C-d>", "<C-d>zz", { desc = "Half-screen down and center screen" })
+keymap("n", "<C-u>", "<C-u>zz", { desc = "Half-screen up and center screen" })
 
 -- Paste
 keymap("n", "]p", "o<Esc>p", { desc = "Paste below" })
@@ -101,10 +101,10 @@ keymap("x", "cc", '"*y', opts)
 keymap("n", "cv", '"*p', opts)
 
 -- Paste over currently selected text without yanking it
-keymap("v", "p", '"_dp')
+keymap("v", "p", '"_dhp')
 
 -- Terminal --
--- Better terminal navigation
+--Better terminal navigation
 keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
