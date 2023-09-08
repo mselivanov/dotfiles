@@ -15,8 +15,10 @@ return {
 			local nls = require("null-ls")
 			local sources =
 				{
-					nls.builtins.formatting.black,
-					nls.builtins.diagnostics.ruff.with({ extra_args = { "--max-line-length=180" } }),
+					nls.builtins.formatting.black.with({
+						extra_args = { "--line-length=80" },
+					}),
+					nls.builtins.diagnostics.ruff.with({ extra_args = { "--max-line-length=80" } }),
 				}, table.insert(opts.sources, sources)
 		end,
 	},
@@ -33,7 +35,7 @@ return {
 				ruff_lsp = {
 					init_options = {
 						settings = {
-							args = { "--max-line-length=180" },
+							args = { "--max-line-length=80" },
 						},
 					},
 				},

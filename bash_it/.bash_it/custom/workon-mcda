@@ -1,0 +1,4 @@
+export PROJECT_PATH="~/repo/CHDAA-MKT-MCDA-DATABRICKS/"
+export SESSION_NAME="ide-mcda"
+
+start_ide "${SESSION_NAME}" "${PROJECT_PATH}"
