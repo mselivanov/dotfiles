@@ -18,27 +18,19 @@ return {
 					nls.builtins.formatting.black.with({
 						extra_args = { "--line-length=80" },
 					}),
-					nls.builtins.diagnostics.ruff.with({ extra_args = { "--max-line-length=80" } }),
 				}, table.insert(opts.sources, sources)
 		end,
 	},
 	{
 		"williamboman/mason.nvim",
 		opts = function(_, opts)
-			vim.list_extend(opts.ensure_installed, { "debugpy", "black", "ruff", "ruff-lsp" })
+			vim.list_extend(opts.ensure_installed, { "debugpy", "black" })
 		end,
 	},
 	{
 		"neovim/nvim-lspconfig",
 		opts = {
 			servers = {
-				ruff_lsp = {
-					init_options = {
-						settings = {
-							args = { "--max-line-length=80" },
-						},
-					},
-				},
 				pyright = {
 					settings = {
 						python = {

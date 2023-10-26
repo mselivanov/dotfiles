@@ -110,6 +110,13 @@ keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
+-- Git --
+--
+keymap("n", "<leader>gd", ":Gvdiffsplit!<CR>", opts, { desc = "Diff in 3 vsplits" })
+keymap("n", "<leader>gh", ":diffget //2<CR>", opts, { desc = "Get hunk from left" })
+keymap("n", "<leader>gl", ":diffget //3<CR>", opts, { desc = "Get hunk from right" })
+keymap("n", "<leader>gw", ":Gwrite!<CR>", opts, { desc = "Write work copy" })
+
 -- SQL find and replace
 keymap("v", "<leader>rp", ":s/[.:]/_/g<CR>:nohl<CR>", opts)
 keymap("v", "<leader>rd", ":s/\\(\\s*\\)\\(\\S\\+\\)\\(.\\{-}\\)\\(,\\?$\\)/\\1\\2\\4/g<CR>:nohl<CR>", opts)
