@@ -11,6 +11,7 @@ return {
     view = {
       number = true,
       relativenumber = true,
+      width = 40
     },
     filters = {
       custom = { ".git" },
@@ -22,7 +23,7 @@ return {
     },
     actions = {
       open_file = {
-        quit_on_open = true,
+        quit_on_open = false,
       },
     },
   },

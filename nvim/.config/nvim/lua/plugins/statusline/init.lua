@@ -4,7 +4,7 @@ return {
 		event = "VeryLazy",
 
 		config = function()
-			local components = require("base.statusline.components")
+			local components = require("plugins.statusline.components")
 
 			require("lualine").setup({
 				options = {
