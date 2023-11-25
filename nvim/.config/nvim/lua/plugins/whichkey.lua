@@ -60,6 +60,7 @@ return {
           q = { function() require("utils").quit() end, "Quit", },
           t = { "<cmd>tabclose<cr>", "Close Tab" },
           b = { "Close Buffer" },
+          a = { "Close all buffers" },
         },
 				a = { name = "+AI" },
 				d = { name = "+Debug" },

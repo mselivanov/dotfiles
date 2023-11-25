@@ -55,6 +55,7 @@ keymap("n", "<A-l>", ":vertical resize +2<CR>", opts)
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 keymap("n", "<leader>qb", ":bdel!<CR>", opts)
+keymap("n", "<leader>qa", ":bufdo bdel!<CR>", opts)
 
 -- Insert --
 -- Press jk fast to exit insert mode
