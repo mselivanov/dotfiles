@@ -3,19 +3,8 @@ return {
 	"nvim-lua/plenary.nvim",
 	-- UI library
 	"MunifTanjim/nui.nvim",
-	{
-		-- Icons
-		"nvim-tree/nvim-web-devicons",
-		dependencies = { "DaikyXendo/nvim-material-icon" },
-		config = function()
-			require("nvim-web-devicons").setup({
-				override = require("nvim-material-icon").get_icons(),
-			})
-		end,
-	},
+	{ "nvim-tree/nvim-web-devicons" },
 	-- Collection of icons for plugins
-	{ "yamatsum/nvim-nonicons", config = true, enabled = false },
-	-- Enable repeating supported plugin maps with a dot
 	{ "tpope/vim-repeat", event = "VeryLazy" },
 	-- Peeking the line while entering line number in the command line
 	{ "nacro90/numb.nvim", event = "BufReadPre", config = true },
