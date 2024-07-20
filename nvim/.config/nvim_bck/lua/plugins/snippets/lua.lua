@@ -1,3 +1,7 @@
+if not require("config").pde.lua then
+	return {}
+end
+
 local ls = require("luasnip")
 local s = ls.snippet
 local i = ls.insert_node

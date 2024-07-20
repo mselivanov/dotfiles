@@ -55,6 +55,7 @@ keymap("n", "<A-l>", ":vertical resize +2<CR>", opts)
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 keymap("n", "<leader>qb", ":bdel!<CR>", opts)
+keymap("n", "<leader>qa", ":bufdo bdel!<CR>", opts)
 
 -- Insert --
 -- Press jk fast to exit insert mode
@@ -109,6 +110,13 @@ keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+
+-- Git --
+--
+keymap("n", "<leader>gd", ":Gvdiffsplit!<CR>", opts, { desc = "Diff in 3 vsplits" })
+keymap("n", "<leader>gh", ":diffget //2<CR>", opts, { desc = "Get hunk from left" })
+keymap("n", "<leader>gl", ":diffget //3<CR>", opts, { desc = "Get hunk from right" })
+keymap("n", "<leader>gw", ":Gwrite!<CR>", opts, { desc = "Write work copy" })
 
 -- SQL find and replace
 keymap("v", "<leader>rp", ":s/[.:]/_/g<CR>:nohl<CR>", opts)

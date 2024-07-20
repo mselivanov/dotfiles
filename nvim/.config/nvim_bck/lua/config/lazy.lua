@@ -15,7 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Configure lazy.nvim
 require("lazy").setup({
 	spec = {
-		{ import = "extra" },
+		{ import = "plugins" },
 	},
 	defaults = { lazy = true, version = nil },
 	install = { missing = true, colorscheme = { "nord" } },

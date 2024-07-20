@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # If not running interactively, don't do anything
 case $- in
 *i*) ;;
@@ -28,7 +27,6 @@ fi
 #------------------------------------------------
 # Path to the bash it configuration
 export BASH_IT="${HOME}/.bash_it"
-export BASH_IT_THEME='modern'
 
 # Google Cloud configuration
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
@@ -41,6 +39,8 @@ export SCM_CHECK=true
 
 # Load Bash It
 source "${BASH_IT}/bash_it.sh"
+source "${BASH_IT}/custom/devextension.bash"
+source "${BASH_IT}/custom/ssh-agent-manage.bash"
 
 # Python tools configuration
 #------------------------------------------------
@@ -52,23 +52,20 @@ eval "$(pyenv init -)"
 # Virualenvs location
 export WORKON_HOME=${HOME}/.virtualenvs
 
-# Starship configuration
-#------------------------------------------------
-# Starship init
-eval "$(starship init bash)"
-
 # ssh-agent start
 #------------------------------------------------
+ssh_init_files
+ssh_start_agent
 # ssh-agent
-if [[ ! -z ${SSH_AGENT_PID} ]]; then
-	if ps -p ${SSH_AGENT_PID} >/dev/null; then
-		echo "SSH Agent is already running. PID: ${SSH_AGENT_PID}"
-	else
-		eval "$(ssh-agent -s)"
-	fi
-else
-	eval "$(ssh-agent -s)"
-fi
+# if [[ ! -z ${SSH_AGENT_PID} ]]; then
+# 	if ps -p ${SSH_AGENT_PID} >/dev/null; then
+# 		echo "SSH Agent is already running. PID: ${SSH_AGENT_PID}"
+# 	else
+# 		eval "$(ssh-agent -s)"
+# 	fi
+# else
+# 	eval "$(ssh-agent -s)"
+# fi
 
 export PATH=${PATH}:/usr/local/go/bin
 if command -v zoxide >/dev/null; then
@@ -76,5 +73,9 @@ if command -v zoxide >/dev/null; then
 fi
 
 export PATH=$PATH:/home/vagrant/bin
+export PATH=$PATH:"$(yarn global bin)"
 
-source '/home/vagrant/lib/azure-cli/az.completion'
+# Starship configuration
+#------------------------------------------------
+# Starship init
+eval "$(starship init bash)"

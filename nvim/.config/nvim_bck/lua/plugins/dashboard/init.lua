@@ -1,3 +1,7 @@
+if not require("config").features.base_dashboard then
+	return {}
+end
+
 local logo = require("plugins.dashboard.logo")
 
 return {

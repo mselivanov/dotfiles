@@ -10,6 +10,7 @@ local options = {
 	cursorline = true, -- highlight the current line
 	expandtab = true, -- convert tabs to spaces
 	fileencoding = "utf-8", -- the encoding written to a file
+	filetype = "on",
 	guifont = "monospace:h17", -- the font used in graphical neovim applications
 	hlsearch = false, -- highlight all matches on previous search pattern
 	ignorecase = true, -- ignore case in search patterns
