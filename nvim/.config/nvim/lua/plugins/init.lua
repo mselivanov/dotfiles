@@ -24,7 +24,7 @@ return {
 	-- Delete/change parentheses, tags and else
 	{ "tpope/vim-surround", event = "BufReadPre" },
 	-- Git integration
-	{ "tpope/vim-fugitive", event = "BufReadPre" },
+	-- { "tpope/vim-fugitive", event = "BufReadPre" },
 	{
 		-- Comment plugin
 		"numToStr/Comment.nvim",

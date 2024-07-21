@@ -16,7 +16,6 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"jay-babu/mason-null-ls.nvim",
 		},
 		opts = {
 			servers = {
@@ -130,10 +129,6 @@ return {
 				},
 			}
 		end,
-	},
-	{
-		"jay-babu/mason-null-ls.nvim",
-		opts = { ensure_installed = nil, automatic_installation = true, automatic_setup = false },
 	},
 	{
 		"utilyre/barbecue.nvim",

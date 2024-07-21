@@ -16,13 +16,8 @@ return {
     -- stylua: ignore
     keys = {
       { "<leader><space>", require("utils").find_files, desc = "Find Files" },
-      { "<leader>fp", "<cmd>Telescope lazy<cr>", desc = "Search Plugins" },
-      { "<leader>hs", "<cmd>Telescope help_tags<cr>", desc = "Search" },
-      { "<leader>pp", function() require("telescope").extensions.project.project { display_type = "minimal" } end, desc = "List", },
       { "<leader>ss", "<cmd>Telescope luasnip<cr>", desc = "Snippets" },
       { "<leader>sb", function() require("telescope.builtin").current_buffer_fuzzy_find() end, desc = "Buffer", },
-      { "<leader>vo", "<cmd>Telescope aerial<cr>", desc = "Code Outline" },
-      { "<leader>zc", function() require("telescope.builtin").colorscheme({enable_preview = true}) end, desc = "Colorscheme", },
     },
 		config = function(_, _)
 			local telescope = require("telescope")
