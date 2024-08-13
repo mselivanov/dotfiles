@@ -119,22 +119,22 @@ return {
 						},
 					})
 				end,
-				-- ["pyright"] = function()
-				--   -- configure lua server (with special settings)
-				--   lspconfig["pyright"].setup({
-				--     settings = {
-				--       pyright = {
-				--         disableOrganizeImports = true,
-				--       },
-				--       python = {
-				--         analysis = {
-				--           ignore = { '*' },
-				--         },
-				--       },
-				--     },
-				--     capabilities = capabilities,
-				--   })
-				-- end,
+				["pyright"] = function()
+					-- configure lua server (with special settings)
+					lspconfig["pyright"].setup({
+						settings = {
+							pyright = {
+								disableOrganizeImports = true,
+							},
+							python = {
+								analysis = {
+									ignore = { "*" },
+								},
+							},
+						},
+						capabilities = capabilities,
+					})
+				end,
 				["ruff"] = function()
 					-- configure lua server (with special settings)
 					lspconfig["ruff"].setup({

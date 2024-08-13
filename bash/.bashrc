@@ -67,7 +67,7 @@ ssh_start_agent
 # 	eval "$(ssh-agent -s)"
 # fi
 
-export PATH=${PATH}:/usr/local/go/bin
+export PATH=${PATH}:/usr/local/go/bin:/usr/local/bin
 if command -v zoxide >/dev/null; then
 	eval "$(zoxide init bash)"
 fi
