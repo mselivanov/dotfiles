@@ -1,163 +1,94 @@
-return {
-	{
-		"nvim-telescope/telescope.nvim",
-		dependencies = {
-			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-			"nvim-telescope/telescope-file-browser.nvim",
-			"nvim-telescope/telescope-project.nvim",
-			"stevearc/aerial.nvim",
-			"aaronhallaert/advanced-git-search.nvim",
-			"benfowler/telescope-luasnip.nvim",
-			"olacin/telescope-cc.nvim",
-			"tsakirist/telescope-lazy.nvim",
-			"nvim-telescope/telescope-live-grep-args.nvim",
+return { -- Fuzzy Finder (files, lsp, etc)
+	"nvim-telescope/telescope.nvim",
+	event = "VimEnter",
+	branch = "0.1.x",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		{
+			"nvim-telescope/telescope-fzf-native.nvim",
+			build = "make",
+			cond = function()
+				return vim.fn.executable("make") == 1
+			end,
 		},
-		cmd = "Telescope",
-    -- stylua: ignore
-    keys = {
-      { "<leader><space>", require("utils").find_files, desc = "Find Files" },
-      { "<leader>ss", "<cmd>Telescope luasnip<cr>", desc = "Snippets" },
-      { "<leader>sb", function() require("telescope.builtin").current_buffer_fuzzy_find() end, desc = "Buffer", },
-    },
-		config = function(_, _)
-			local telescope = require("telescope")
-			local actions = require("telescope.actions")
-			local actions_layout = require("telescope.actions.layout")
-			local transform_mod = require("telescope.actions.mt").transform_mod
-			local custom_actions = transform_mod({
-				-- VisiData
-				visidata = function(prompt_bufnr)
-					-- Get the full path
-					local content = require("telescope.actions.state").get_selected_entry()
-					if content == nil then
-						return
-					end
-					local full_path = content.cwd .. require("plenary.path").path.sep .. content.value
+		{ "nvim-telescope/telescope-ui-select.nvim" },
+		{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
+	},
+	config = function()
+		local actions = require("telescope.actions")
+		local actions_layout = require("telescope.actions.layout")
+		local mappings = {
+			i = {
+				["<C-j>"] = actions.move_selection_next,
+				["<C-k>"] = actions.move_selection_previous,
+				["<C-n>"] = actions.cycle_history_next,
+				["<C-p>"] = actions.cycle_history_prev,
+				["?"] = actions_layout.toggle_preview,
+			},
+		}
+		local vimgrep_arguments = {
+			"rg",
+			"--color=never",
+			"--no-heading",
+			"--with-filename",
+			"--line-number",
+			"--column",
+			"--smart-case",
+			"--hidden",
+		}
+		require("telescope").setup({
+			defaults = {
+				prompt_prefix = " ",
+				selection_caret = " ",
+				mappings = mappings,
+				border = {},
+				borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+				color_devicons = true,
+				vimgrep_arguments = vimgrep_arguments,
+			},
+			extensions = {
+				["ui-select"] = {
+					require("telescope.themes").get_dropdown(),
+				},
+			},
+		})
 
-					-- Close the Telescope window
-					require("telescope.actions").close(prompt_bufnr)
+		-- Enable Telescope extensions if they are installed
+		pcall(require("telescope").load_extension, "fzf")
+		pcall(require("telescope").load_extension, "ui-select")
 
-					-- Open the file with VisiData
-					local utils = require("utils")
-					utils.open_term("vd " .. full_path, { direction = "float" })
-				end,
+		-- See `:help telescope.builtin`
+		local builtin = require("telescope.builtin")
+		vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[S]earch [H]elp" })
+		vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
+		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[S]earch [F]iles" })
+		vim.keymap.set("n", "<leader>fs", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
+		vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
+		vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[S]earch by [G]rep" })
+		vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
+		vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[S]earch [R]esume" })
+		vim.keymap.set("n", "<leader>f.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+		vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
+		vim.keymap.set("n", "<leader>/", function()
+			-- You can pass additional configuration to Telescope to change the theme, layout, etc.
+			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+				winblend = 10,
+				previewer = false,
+			}))
+		end, { desc = "[/] Fuzzily search in current buffer" })
 
-				-- File browser
-				file_browser = function(prompt_bufnr)
-					local content = require("telescope.actions.state").get_selected_entry()
-					if content == nil then
-						return
-					end
-
-					local full_path = content.cwd
-					if content.filename then
-						full_path = content.filename
-					elseif content.value then
-						full_path = full_path .. require("plenary.path").path.sep .. content.value
-					end
-
-					-- Close the Telescope window
-					require("telescope.actions").close(prompt_bufnr)
-
-					-- Open file browser
-					-- vim.cmd("Telescope file_browser select_buffer=true path=" .. vim.fs.dirname(full_path))
-					require("telescope").extensions.file_browser.file_browser({
-						select_buffer = true,
-						path = vim.fs.dirname(full_path),
-					})
-				end,
+		-- It's also possible to pass additional configuration options.
+		--  See `:help telescope.builtin.live_grep()` for information about particular keys
+		vim.keymap.set("n", "<leader>f/", function()
+			builtin.live_grep({
+				grep_open_files = true,
+				prompt_title = "Live Grep in Open Files",
 			})
+		end, { desc = "[S]earch [/] in Open Files" })
 
-			local mappings = {
-				i = {
-					["<C-j>"] = actions.move_selection_next,
-					["<C-k>"] = actions.move_selection_previous,
-					["<C-n>"] = actions.cycle_history_next,
-					["<C-p>"] = actions.cycle_history_prev,
-					["?"] = actions_layout.toggle_preview,
-					["<C-s>"] = custom_actions.visidata,
-					["<A-f>"] = custom_actions.file_browser,
-				},
-				n = {
-					["s"] = custom_actions.visidata,
-					["<A-f>"] = custom_actions.file_browser,
-				},
-			}
-
-			local vimgrep_arguments = {
-				"rg",
-				"--color=never",
-				"--no-heading",
-				"--with-filename",
-				"--line-number",
-				"--column",
-				"--smart-case",
-				"--hidden",
-			}
-
-			local opts = {
-				defaults = {
-					prompt_prefix = " ",
-					selection_caret = " ",
-					mappings = mappings,
-					border = {},
-					borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
-					color_devicons = true,
-					vimgrep_arguments = vimgrep_arguments,
-				},
-				pickers = {
-					find_files = {
-						theme = "dropdown",
-						previewer = false,
-						hidden = true,
-						find_command = { "rg", "--files", "--hidden", "-g", "!.git" },
-					},
-					git_files = {
-						theme = "dropdown",
-						previewer = false,
-					},
-					buffers = {
-						theme = "dropdown",
-						previewer = false,
-					},
-				},
-				extensions = {
-					file_browser = {
-						theme = "dropdown",
-						previewer = false,
-						hijack_netrw = true,
-						mappings = mappings,
-					},
-					project = {
-						hidden_files = false,
-						theme = "dropdown",
-						base_dirs = {
-							"~",
-						},
-						hidden_files = true,
-						order_by = "asc",
-						search_by = "title",
-						sync_with_nvim_tree = true,
-						on_project_selected = function(prompt_bufnr)
-							local project_actions = require("telescope._extensions.project.actions")
-							project_actions.change_working_directory(prompt_bufnr)
-						end,
-					},
-				},
-			}
-			telescope.setup(opts)
-			telescope.load_extension("fzf")
-			telescope.load_extension("file_browser")
-			telescope.load_extension("project")
-			telescope.load_extension("aerial")
-			telescope.load_extension("luasnip")
-			telescope.load_extension("conventional_commits")
-			telescope.load_extension("lazy")
-			telescope.load_extension("live_grep_args")
-		end,
-	},
-	{
-		"stevearc/aerial.nvim",
-		config = true,
-	},
+		-- Shortcut for searching your Neovim configuration files
+		vim.keymap.set("n", "<leader>fn", function()
+			builtin.find_files({ cwd = vim.fn.stdpath("config") })
+		end, { desc = "[S]earch [N]eovim files" })
+	end,
 }

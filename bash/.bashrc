@@ -72,7 +72,8 @@ if command -v zoxide >/dev/null; then
 	eval "$(zoxide init bash)"
 fi
 
-export PATH=$PATH:/home/vagrant/bin
+export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:"$(yarn global bin)"
 
 # Starship configuration

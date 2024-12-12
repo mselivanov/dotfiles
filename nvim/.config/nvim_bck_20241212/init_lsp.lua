@@ -17,6 +17,7 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
+			"jay-babu/mason-null-ls.nvim",
 		},
 		config = function()
 			-- import lspconfig plugin
@@ -76,23 +77,18 @@ return {
 
 					opts.desc = "Restart LSP"
 					keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
-
-					-- opts.desc = "Format Document"
-					-- keymap.set("n", "<leader>cf", vim.lsp.buf.format, opts) -- mapping to restart lsp if necessary
 				end,
 			})
 
 			-- used to enable autocompletion (assign to every lsp server config)
 			local capabilities = cmp_nvim_lsp.default_capabilities()
-			local icons = require("config.icons")
-			local signs = {
-				{ name = "DiagnosticSignError", text = icons.diagnostics.Error },
-				{ name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
-				{ name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
-				{ name = "DiagnosticSignInfo", text = icons.diagnostics.Info },
-			}
-			for _, sign in ipairs(signs) do
-				vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
+
+			-- Change the Diagnostic symbols in the sign column (gutter)
+			-- (not in youtube nvim video)
+			local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+			for type, icon in pairs(signs) do
+				local hl = "DiagnosticSign" .. type
+				vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 			end
 
 			mason_lspconfig.setup_handlers({
@@ -102,6 +98,7 @@ return {
 						capabilities = capabilities,
 					})
 				end,
+
 				["lua_ls"] = function()
 					-- configure lua server (with special settings)
 					lspconfig["lua_ls"].setup({
@@ -119,28 +116,6 @@ return {
 						},
 					})
 				end,
-				["pyright"] = function()
-					-- configure lua server (with special settings)
-					lspconfig["pyright"].setup({
-						settings = {
-							pyright = {
-								disableOrganizeImports = true,
-							},
-							python = {
-								analysis = {
-									ignore = { "*" },
-								},
-							},
-						},
-						capabilities = capabilities,
-					})
-				end,
-				["ruff"] = function()
-					-- configure lua server (with special settings)
-					lspconfig["ruff"].setup({
-						capabilities = capabilities,
-					})
-				end,
 			})
 		end,
 	},
@@ -151,8 +126,6 @@ return {
 		opts = {
 			ensure_installed = {
 				"stylua",
-				"debugpy",
-				"black",
 			},
 		},
 		config = function(_, opts)
@@ -165,6 +138,29 @@ return {
 				end
 			end
 		end,
+	},
+	-- {
+	-- 	"jose-elias-alvarez/null-ls.nvim",
+	-- 	event = "BufReadPre",
+	-- 	dependencies = { "mason.nvim" },
+	-- 	opts = function()
+	-- 		local nls = require("null-ls")
+	-- 		return {
+	-- 			root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
+	-- 			sources = {
+	-- 				nls.builtins.formatting.shfmt,
+	-- 				nls.builtins.formatting.ruff,
+	-- 				-- nls.builtins.formatting.black.with({
+	-- 				-- 	extra_args = { "--line-length=120" },
+	-- 				-- }),
+	-- 				nls.builtins.formatting.stylua,
+	-- 			},
+	-- 		}
+	-- 	end,
+	-- },
+	{
+		"jay-babu/mason-null-ls.nvim",
+		opts = { ensure_installed = nil, automatic_installation = true, automatic_setup = false },
 	},
 	{
 		"utilyre/barbecue.nvim",

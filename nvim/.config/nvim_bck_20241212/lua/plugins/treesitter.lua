@@ -40,7 +40,6 @@ return {
 				"python",
 				"query",
 				"regex",
-				"latex",
 				"sql",
 				"vim",
 				"yaml",

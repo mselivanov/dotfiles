@@ -1,123 +1,54 @@
-local swap_next, swap_prev = (function()
-	local swap_objects = {
-		p = "@parameter.inner",
-		f = "@function.outer",
-		c = "@class.outer",
-	}
-
-	local n, p = {}, {}
-	for key, obj in pairs(swap_objects) do
-		n[string.format("<leader>cx%s", key)] = obj
-		p[string.format("<leader>cX%s", key)] = obj
-	end
-
-	return n, p
-end)()
-
-return {
-	{
-		"nvim-treesitter/nvim-treesitter",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter-textobjects",
-			"RRethy/nvim-treesitter-endwise",
-			"nvim-treesitter/playground",
+return { -- Highlight, edit, and navigate code
+	"nvim-treesitter/nvim-treesitter",
+	dependencies = {
+		"nvim-treesitter/nvim-treesitter-context",
+		"nvim-treesitter/nvim-treesitter-refactor",
+	},
+	build = ":TSUpdate",
+	main = "nvim-treesitter.configs", -- Sets main module to use for opts
+	-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
+	opts = {
+		ensure_installed = {
+			"bash",
+			"diff",
+			"lua",
+			"luadoc",
+			"markdown",
+			"markdown_inline",
+			"query",
+			"vim",
+			"vimdoc",
+			"python",
 		},
-		branch = "master",
-		build = ":TSUpdate",
-		event = { "BufReadPost", "BufNewFile" },
-		opts = {
-			sync_install = false,
-			ensure_installed = {
-				"bash",
-				"dockerfile",
-				"html",
-				"lua",
-				"luadoc",
-				"luap",
-				"markdown",
-				"markdown_inline",
-				"org",
-				"python",
-				"query",
-				"regex",
-				"sql",
-				"vim",
-				"yaml",
-			},
-			highlight = { enable = true, additional_vim_regex_highlighting = { "org", "markdown" } },
-			indent = { enable = true },
-			context_commentstring = { enable = true, enable_autocmd = false },
-			incremental_selection = {
+		-- Autoinstall languages that are not installed
+		auto_install = true,
+		highlight = {
+			enable = true,
+			-- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
+			--  If you are experiencing weird indenting issues, add the language to
+			--  the list of additional_vim_regex_highlighting and disabled languages for indent.
+			additional_vim_regex_highlighting = { "ruby" },
+		},
+		indent = { enable = true, disable = { "ruby" } },
+		refactor = {
+			highlight_definitions = {
 				enable = true,
+				-- Set to false if you have an `updatetime` of ~100.
+				clear_on_cursor_move = true,
+			},
+			smart_rename = {
+				enable = true,
+				-- Assign keymaps to false to disable them, e.g. `smart_rename = false`.
 				keymaps = {
-					init_selection = "gnn",
-					node_incremental = "grn",
-					scope_incremental = "grc",
-					node_decremental = "grm",
+					smart_rename = "grr",
 				},
-			},
-			textobjects = {
-				select = {
-					enable = true,
-					lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-					keymaps = {
-						-- You can use the capture groups defined in textobjects.scm
-						["aa"] = "@parameter.outer",
-						["ia"] = "@parameter.inner",
-						["af"] = "@function.outer",
-						["if"] = "@function.inner",
-						["ac"] = "@class.outer",
-						["ic"] = "@class.inner",
-					},
-				},
-				move = {
-					enable = true,
-					set_jumps = true, -- whether to set jumps in the jumplist
-					goto_next_start = {
-						["]m"] = "@function.outer",
-						["]]"] = "@class.outer",
-					},
-					goto_next_end = {
-						["]M"] = "@function.outer",
-						["]["] = "@class.outer",
-					},
-					goto_previous_start = {
-						["[m"] = "@function.outer",
-						["[["] = "@class.outer",
-					},
-					goto_previous_end = {
-						["[M"] = "@function.outer",
-						["[]"] = "@class.outer",
-					},
-				},
-				swap = {
-					enable = true,
-					swap_next = swap_next,
-					swap_previous = swap_prev,
-				},
-			},
-			matchup = {
-				enable = true,
-			},
-			endwise = {
-				enable = true,
-			},
-			autotag = {
-				enable = true,
 			},
 		},
-		config = function(_, opts)
-			require("nvim-treesitter.configs").setup(opts)
-		end,
 	},
-	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		config = function()
-			local npairs = require("nvim-autopairs")
-			npairs.setup({
-				check_ts = true,
-			})
-		end,
-	},
+	-- There are additional nvim-treesitter modules that you can use to interact
+	-- with nvim-treesitter. You should go explore a few and see what interests you:
+	--
+	--    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
+	--    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
+	--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 }
