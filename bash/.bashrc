@@ -41,6 +41,7 @@ export SCM_CHECK=true
 source "${BASH_IT}/bash_it.sh"
 source "${BASH_IT}/custom/devextension.bash"
 source "${BASH_IT}/custom/ssh-agent-manage.bash"
+export BASH_IT_THEME=""
 
 # Python tools configuration
 #------------------------------------------------
