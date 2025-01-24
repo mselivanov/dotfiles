@@ -23,6 +23,7 @@ else
 	export EDITOR="nvim"
 fi
 
+export ZK_NOTEBOOK_DIR="${HOME}/brain"
 # Bash It configuration
 #------------------------------------------------
 # Path to the bash it configuration

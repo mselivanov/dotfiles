@@ -1,7 +1,5 @@
 # zk configuration file
 #
-# Uncomment the properties you want to customize.
-
 # NOTE SETTINGS
 #
 # Defines the default options used when generating new notes.
@@ -9,16 +7,16 @@
 
 # Language used when writing notes.
 # This is used to generate slugs or with date formats.
-#language = "en"
+language = "en"
 
 # The default title used for new note, if no `--title` flag is provided.
-#default-title = "Untitled"
+default-title = "Untitled"
 
 # Template used to generate a note's filename, without extension.
-#filename = "{{id}}"
+filename = "{{id}}"
 
 # The file extension used for the notes.
-#extension = "md"
+extension = "md"
 
 # Template used to generate a note's content.
 # If not an absolute path, it is relative to .zk/templates/
@@ -75,6 +73,13 @@ template = "default.md"
 #[group."<NAME>".extra]
 #key = "value"
 
+[group.daily]
+paths = ["journal/day"]
+
+[group.daily.note]
+filename = "{{format-date now '%Y%m%d'}}"
+extension = "md"
+template = "daily.md"
 
 # MARKDOWN SETTINGS
 [format.markdown]
@@ -165,7 +170,8 @@ dead-link = "error"
 #     * you can pipe commands together with the usual | character
 #
 [alias]
-# Here are a few aliases to get you started.
+
+daily = 'zk new --no-input "$ZK_NOTEBOOK_DIR/journal/day/"'
 
 # Shortcut to a command.
 #ls = "zk list $@"
