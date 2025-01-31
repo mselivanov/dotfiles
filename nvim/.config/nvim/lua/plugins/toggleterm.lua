@@ -5,13 +5,19 @@ return {
 
 		config = function()
 			require("toggleterm").setup({
+				--open_mapping = [[<c-\>]],
 				start_in_insert = true,
 				direction = "float",
 				float_opts = {
-					border = "single",
+					border = "double",
 					title_pos = "left",
 				},
 			})
+
+			local opts = { noremap = true, silent = false }
+			opts.desc = "[t]erminal"
+			vim.api.nvim_set_keymap("n", "<C-\\>", "<Cmd>ToggleTerm<CR>", opts)
+			vim.api.nvim_set_keymap("t", "<C-\\>", "<Cmd>ToggleTerm<CR>", opts)
 		end,
 	},
 }
