@@ -53,6 +53,7 @@ return {
 			{ "<leader>w", group = "[w]orkspace" },
 			{ "<leader>t", group = "[t]oggle" },
 			{ "<leader>h", group = "Git [h]unk", mode = { "n", "v" } },
+			{ "<leader>s", group = "[s]ettings" },
 		},
 	},
 }

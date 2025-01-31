@@ -1,7 +1,8 @@
-# Todo
+# Day {{format-date now '%Y-%m-%d'}}
 
-# Brain dump
+## Outcomes
 
-# Highlights
+## Todo
 
-# Wrap up
+## Brain dump
+
