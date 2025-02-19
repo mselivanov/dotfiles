@@ -24,11 +24,16 @@ function ssh_start_agent() {
 	local ssh_pid_file="$HOME/.config/ssh-agent.pid"
 	SSH_AUTH_SOCK="$HOME/.config/ssh-agent.sock"
 
+	# Get agent PIDs for env and file
+	# if agent from file is running
+	  # Check if from env is running - kill if yes
+	  # Set env var from file
+	# If 
+
+	ssh_agent_pid_from_file=$(cat "$ssh_pid_file")
 	if [ -z "$SSH_AGENT_PID" ]; then
 		# no PID exported, try to get it from pidfile
-		SSH_AGENT_PID=$(cat "$ssh_pid_file")
-	else
-		ssh_agent_pid_from_file=$(cat "$ssh_pid_file")
+		SSH_AGENT_PID=${ssh_agent_pid_from_file}
 	fi
 
 	if [[ "${SSH_AGENT_PID}" -eq "${ssh_agent_pid_from_file}" ]]; then

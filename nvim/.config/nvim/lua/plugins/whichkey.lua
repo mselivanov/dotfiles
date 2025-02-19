@@ -41,10 +41,11 @@ return {
 
 		-- Document existing key chains
 		spec = {
-			{ "<leader>a", group = "[a]ppearance", mode = { "n", "x" } },
+			{ "<leader>a", group = "[a]i", mode = { "n", "x" } },
 			{ "<leader>c", group = "[c]ode", mode = { "n", "x" } },
 			{ "<leader>cq", vim.diagnostic.setloclist, mode = { "n" }, desc = "Open quickfix list" },
 			{ "<leader>d", group = "[d]ocument" },
+			{ "<leader>m", group = "[m]arkdown" },
 			{ "<leader>r", group = "[r]ename" },
 			{ "<leader>f", group = "[f]ind" },
 			{ "<leader>F", group = "[F]ile" },

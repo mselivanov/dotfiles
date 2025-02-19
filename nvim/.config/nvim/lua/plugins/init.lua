@@ -1,4 +1,13 @@
 return {
+	{
+		"preservim/vim-markdown",
+		config = function()
+			local opts = { noremap = true, silent = false }
+			opts.desc = "format [t]able"
+			vim.api.nvim_set_keymap("n", "<leader>mt", "<Cmd>TableFormat<CR>", opts)
+		end,
+	},
+	"godlygeek/tabular",
 	-- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 	"romainl/vim-cool", -- Auto enable/disable highlight search
