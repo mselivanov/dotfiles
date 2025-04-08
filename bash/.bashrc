@@ -46,13 +46,6 @@ export BASH_IT_THEME=""
 
 # Python tools configuration
 #------------------------------------------------
-# Pyenv init
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-# Virualenvs location
-export WORKON_HOME=${HOME}/.virtualenvs
 
 # ssh-agent start
 #------------------------------------------------
