@@ -1,46 +1,68 @@
 #!/usr/bin/env bash
 
+TMP_WINDOW_NAME="tmp_start_window"
+
 function cleanup_nvim() {
 	rm -rf ~/.config/nvim
 	rm -rf ~/.local/share/nvim
 	rm -rf ~/.cache/nvim
 }
 
-function start_ide() {
-	local _session_name="$1"
-	local _project_path="$2"
 
-	tmux has-session -t ${_session_name} 2>/dev/null
-	if [[ $? != 0 ]]; then
-		tmux new-session -s "${_session_name}" -d
-		start_editor "${_session_name}" "${_project_path}" "editor" "0"
-		tmux new-window -n console -t "${_session_name}"
-		tmux send-keys -t "${_session_name}:2" "cd ${_project_path}" C-m
-		tmux new-window -n scratchpad -t "${_session_name}"
-		tmux send-keys -t "${_session_name}:3" "cd ${_project_path}" C-m
-		tmux select-window -t 1
-	fi
-	tmux attach -t ${_session_name}
+function tmux_create_session() {
+    local session_name=$1
+    
+    # Check if session already exists
+    tmux has-session -t $session_name 2>/dev/null
+    
+    if [[ $? != 0 ]]; then
+        # Create a new session with a window named "main"
+	tmux set-option -t $session_name base-index 0
+        tmux new-session -d -s $session_name -n "${TMP_WINDOW_NAME}"
+        echo "Created new tmux session: $session_name"
+	return 0
+    else
+        echo "Session $session_name already exists"
+	return 1
+    fi
 }
 
-function start_editor() {
-	local _session_name="$1"
-	local _project_path="$2"
-	local _window_name="$3"
-	local _window_after_index="$4"
+function tmux_post_cleanup() {
+  local session_name=$1
+  tmux kill-window -t ${session_name}:${TMP_WINDOW_NAME}
+}
 
-	tmux new-window -n "${_window_name}" -t "${_session_name}"
-	tmux send-keys -t "${_session_name}" "cd ${_project_path}" C-m
-	tmux send-keys -t "${_session_name}" "$EDITOR" C-m
+function tmux_create_app_window() {
+    local session_name=$1
+    local window_name=$2
+    local exec_name=$3
+    local start_path=$4
+    local command=""
+    
+
+    if [[ "$start_path" != "" ]];
+    then
+      command="cd ${start_path} && "
+    fi
+
+    if [[ "$exec_name" != "" ]];
+    then
+      command="${command} ${exec_name}"
+    else
+      command="${command} exec bash"
+    fi
+    # Create a new window running app
+    tmux new-window -d -t $session_name: -n $window_name "${command}"
+    echo "Created $window_name window"
 }
 
 function workon() {
-	_env_code="$1"
-	_init_file_path="${BASH_IT}/custom/workon-${_env_code}"
-	if [[ -f "${_init_file_path}" ]]; then
-		source "${_init_file_path}"
-	else
-		printf "Can't initialize environment: ${_env_code}\n"
-		printf "Path does not exist: ${_init_file_path}"
-	fi
+  _env_code="$1"
+  _init_file_path="${BASH_IT}/custom/workon-${_env_code}.sh"
+  if [[ -f "${_init_file_path}" ]]; then
+    source "${_init_file_path}"
+  else
+    printf "Can't initialize environment: ${_env_code}\n"
+    printf "Path does not exist: ${_init_file_path}"
+  fi
 }
