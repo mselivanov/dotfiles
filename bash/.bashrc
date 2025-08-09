@@ -75,3 +75,4 @@ export PATH=$PATH:"$(yarn global bin)"
 #------------------------------------------------
 # Starship init
 eval "$(starship init bash)"
+export PATH="$HOME/.local/bin:$PATH"

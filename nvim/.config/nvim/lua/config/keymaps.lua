@@ -116,6 +116,10 @@ keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
+-- Claude Code --
+keymap("n", "<C-]>", "<cmd>ClaudeCode<CR>", { desc = "Toggle Claude Code" })
+keymap("t", "<C-]>", "<cmd>ClaudeCode<CR>", { desc = "Toggle Claude Code" })
+
 -- SQL manipulation
 -- SQL find and replace
 keymap("v", "<leader>rp", ":s/[.:]/_/g<CR>:nohl<CR>", opts)
