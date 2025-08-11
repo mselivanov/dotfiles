@@ -41,7 +41,7 @@ export SCM_CHECK=true
 # Load Bash It
 source "${BASH_IT}/bash_it.sh"
 source "${BASH_IT}/custom/devextension.bash"
-source "${BASH_IT}/custom/ssh-agent-manage.bash"
+source "${BASH_IT}/custom/ssh-agent-systemd.bash"
 export BASH_IT_THEME=""
 
 # Python tools configuration
@@ -49,20 +49,9 @@ export BASH_IT_THEME=""
 
 # ssh-agent start
 #------------------------------------------------
-ssh_init_files
 ssh_start_agent
-# ssh-agent
-# if [[ ! -z ${SSH_AGENT_PID} ]]; then
-# 	if ps -p ${SSH_AGENT_PID} >/dev/null; then
-# 		echo "SSH Agent is already running. PID: ${SSH_AGENT_PID}"
-# 	else
-# 		eval "$(ssh-agent -s)"
-# 	fi
-# else
-# 	eval "$(ssh-agent -s)"
-# fi
 
-export PATH=${PATH}:/usr/local/go/bin:/usr/local/bin
+export PATH=${PATH}:/usr/local/bin
 if command -v zoxide >/dev/null; then
 	eval "$(zoxide init bash)"
 fi

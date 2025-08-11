@@ -1,0 +1,14 @@
+[Unit]
+Description=SSH authentication agent
+Documentation=man:ssh-agent(1)
+
+[Service]
+Type=simple
+Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
+ExecStartPre=/bin/rm -f %t/ssh-agent.socket
+ExecStart=/usr/bin/ssh-agent -D -a %t/ssh-agent.socket
+ExecStartPost=/bin/sh -c 'systemctl --user set-environment SSH_AUTH_SOCK=%t/ssh-agent.socket'
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
