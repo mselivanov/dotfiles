@@ -1,0 +1,11 @@
+[Unit]
+Description=Sync repos twice daily
+
+[Timer]
+# Run at 8:30 AM and 7:00 PM on weekdays
+OnCalendar=Mon-Fri 08:30
+OnCalendar=Mon-Fri 19:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

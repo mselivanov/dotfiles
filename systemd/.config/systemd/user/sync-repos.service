@@ -1,0 +1,9 @@
+[Unit]
+Description=Sync dotfiles and knowledge base repositories
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/bin/sync-repos.sh
+Environment="DOTFILES_DIR=%h/.dotfiles"
+Environment="KNOWLEDGE_DIR=%h/brain"
