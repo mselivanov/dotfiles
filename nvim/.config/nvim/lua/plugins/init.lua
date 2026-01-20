@@ -35,22 +35,25 @@ return {
 	},
 	-- LSP Plugins
 	{
-		-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
-		-- used for completion, annotations and signatures of Neovim apis
-		"folke/lazydev.nvim",
-		ft = "lua",
-		opts = {
-			library = {
-				-- Load luvit types when the `vim.uv` word is found
-				{ path = "luvit-meta/library", words = { "vim%.uv" } },
-			},
-		},
-	},
-	{ "Bilal2453/luvit-meta", lazy = true },
-	{
 		-- Main LSP Configuration
 		"neovim/nvim-lspconfig",
 		dependencies = {
+			-- lazydev MUST be a dependency to configure lua_ls properly
+			{
+				-- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
+				-- used for completion, annotations and signatures of Neovim apis
+				"folke/lazydev.nvim",
+				ft = "lua",
+				opts = {
+					library = {
+						-- Explicitly load Neovim runtime for vim global
+						"${3rd}/luv/library",
+						"lazy.nvim",
+					},
+				},
+			},
+			{ "Bilal2453/luvit-meta", lazy = true },
+
 			-- Automatically install LSPs and related tools to stdpath for Neovim
 			{ "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
 			"williamboman/mason-lspconfig.nvim",
@@ -222,31 +225,19 @@ return {
 			--  - settings (table): Override the default settings passed when initializing the server.
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			local servers = {
-				-- clangd = {},
-				-- gopls = {},
-				-- pyright = {
-				-- 	settings = {
-				-- 		pyright = {
-				-- 			-- Using Ruff's import organizer
-				-- 			disableOrganizeImports = true,
-				-- 		},
-				-- 		python = {
-				-- 			analysis = {
-				-- 				-- Ignore all files for analysis to exclusively use Ruff for linting
-				-- 				ignore = { "*" },
-				-- 			},
-				-- 		},
-				-- 	},
-				-- },
-				-- rust_analyzer = {},
-				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-				--
-				-- Some languages (like typescript) have entire language plugins that can be useful:
-				--    https://github.com/pmizio/typescript-tools.nvim
-				--
-				-- But for many setups, the LSP (`ts_ls`) will work just fine
-				-- ts_ls = {},
-				--
+				ruff = {
+					init_options = {
+						settings = {
+							args = {},
+						},
+					},
+				},
+
+				ty = {
+					settings = {
+						ty = {},
+					},
+				},
 
 				lua_ls = {
 					-- cmd = {...},
@@ -257,8 +248,17 @@ return {
 							completion = {
 								callSnippet = "Replace",
 							},
-							-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-							diagnostics = { globals = { "vim" } },
+							-- Suppress undefined global 'vim' warning
+							diagnostics = {
+								globals = { "vim" },
+								disable = { "missing-fields" },
+							},
+							workspace = {
+								checkThirdParty = false, -- Disable third-party checking prompt
+							},
+							telemetry = {
+								enable = false,
+							},
 						},
 					},
 				},
@@ -292,6 +292,17 @@ return {
 						-- by the server configuration above. Useful when disabling
 						-- certain features of an LSP (for example, turning off formatting for ts_ls)
 						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+
+						-- Debug: print lua_ls config
+						if server_name == "lua_ls" then
+							print("DEBUG: Setting up lua_ls")
+							if server.settings and server.settings.Lua and server.settings.Lua.diagnostics then
+								print("  diagnostics.globals = " .. vim.inspect(server.settings.Lua.diagnostics.globals))
+							else
+								print("  WARNING: No diagnostics settings found!")
+							end
+						end
+
 						require("lspconfig")[server_name].setup(server)
 					end,
 				},
