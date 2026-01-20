@@ -1,0 +1,11 @@
+# Machine-specific tmux configuration
+# Copy to ~/.tmux.conf.local and customize for this machine
+
+# Work machine - different status bar color
+# set -g status-style bg=blue,fg=white
+
+# Home machine - different status bar color
+# set -g status-style bg=green,fg=white
+
+# Machine-specific key bindings
+# bind-key W new-window -c "$WORK_PROJECTS"

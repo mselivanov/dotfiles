@@ -65,3 +65,8 @@ export PATH=$PATH:"$(yarn global bin)"
 # Starship init
 eval "$(starship init bash)"
 export PATH="$HOME/.local/bin:$PATH"
+
+# Source local machine-specific overrides (not in git)
+if [ -f ~/.bashrc.local ]; then
+    source ~/.bashrc.local
+fi

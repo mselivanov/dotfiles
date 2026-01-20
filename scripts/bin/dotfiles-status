@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Check status of dotfiles installation and local configs
+
+echo "=== Dotfiles Status ==="
+echo ""
+
+# Check stow symlinks
+echo "Stowed packages:"
+for pkg in bash tmux starship nvim bash_it zk systemd scripts; do
+    if [ -L "$HOME/.bashrc" ] || [ -L "$HOME/.config/$pkg" ] || [ -L "$HOME/bin" ]; then
+        echo "  ✓ $pkg"
+    else
+        echo "  ✗ $pkg (not stowed)"
+    fi
+done
+
+echo ""
+echo "Machine-specific configs:"
+[ -f ~/.bashrc.local ] && echo "  ✓ ~/.bashrc.local" || echo "  ✗ ~/.bashrc.local (missing)"
+[ -f ~/.config/nvim/local.lua ] && echo "  ✓ ~/.config/nvim/local.lua" || echo "  ✗ ~/.config/nvim/local.lua (missing)"
+[ -f ~/.tmux.conf.local ] && echo "  ✓ ~/.tmux.conf.local" || echo "  ✗ ~/.tmux.conf.local (missing)"
+
+echo ""
+echo "Systemd services:"
+systemctl --user is-active ssh-agent.service >/dev/null 2>&1 && \
+    echo "  ✓ ssh-agent.service (active)" || \
+    echo "  ✗ ssh-agent.service (inactive)"
+
+systemctl --user is-active sync-repos.timer >/dev/null 2>&1 && \
+    echo "  ✓ sync-repos.timer (active)" || \
+    echo "  ✗ sync-repos.timer (inactive)"
+
+if systemctl --user is-active sync-repos.timer >/dev/null 2>&1; then
+    echo ""
+    echo "Next sync scheduled:"
+    systemctl --user list-timers sync-repos.timer --no-pager | tail -n +2
+fi

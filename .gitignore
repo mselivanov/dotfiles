@@ -1,0 +1,12 @@
+# Machine-specific local overrides (not tracked in git)
+*.local
+*local.lua
+*local.vim
+.env.local
+local/
+
+# Systemd environment overrides
+systemd/.config/environment.d/*.conf
+
+# Log files
+*.log

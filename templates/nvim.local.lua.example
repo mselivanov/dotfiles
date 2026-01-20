@@ -1,0 +1,17 @@
+-- Machine-specific Neovim configuration
+-- Copy to ~/.config/nvim/local.lua and customize for this machine
+
+-- Python interpreter path (if different from default)
+-- vim.g.python3_host_prog = '/opt/python3.11/bin/python'
+
+-- Work-specific LSP settings
+-- require('lspconfig').pyright.setup({
+--     settings = {
+--         python = {
+--             pythonPath = '/opt/work-python/bin/python'
+--         }
+--     }
+-- })
+
+-- Machine-specific key mappings
+-- vim.keymap.set('n', '<leader>wp', ':e ~/work-projects/<CR>')

@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Machine-specific bash configuration
+# Copy to ~/.bashrc.local and customize for this machine
+
+# Machine identification
+export MACHINE_NAME="thinkpad-work"  # or "desktop-home", "vbox-arch"
+
+# Work-specific settings (example)
+# export DATABRICKS_HOST="https://work.databricks.com"
+# export WORK_PROJECTS="$HOME/rwe-projects"
+# alias vpn='sudo openvpn /etc/openvpn/work.conf'
+
+# Home-specific settings (example)
+# export PERSONAL_PROJECTS="$HOME/projects"
+# alias nas='ssh maksim@synology.local'
+
+# Path modifications
+# export PATH="$HOME/.local/work-tools/bin:$PATH"
+
+# Custom aliases for this machine
+# alias work='cd $WORK_PROJECTS'
