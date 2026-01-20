@@ -4,6 +4,6 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=%h/bin/sync-repos.sh
+ExecStart=%h/bin/sync-repos
 Environment="DOTFILES_DIR=%h/.dotfiles"
 Environment="KNOWLEDGE_DIR=%h/brain"
