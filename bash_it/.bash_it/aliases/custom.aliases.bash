@@ -1,8 +1,3 @@
-export REPOSITORY_ROOT="${HOME}/repo"
-
-# Google Cloud Commands
-alias bqss='bq show --format prettyjson'
-
 # Custom git aliases
 alias gblsa='git branch --list --all'
 alias gblsl='git branch --list'
@@ -11,8 +6,8 @@ alias gfd='git fetch origin dev:dev'
 alias gur='git add . && git commit && git push --set-upstream origin $(git symbolic-ref --short HEAD)'
 
 # CLI tools aliases
-if [[ "x$(which fdfind 2>/dev/null)" != "x" ]]; then
-	alias fd='fdfind'
+if [[ "x$(which fd 2>/dev/null)" != "x" ]]; then
+	alias fd='fd'
 else
 	alias fd='find'
 fi
@@ -26,8 +21,21 @@ then
 else
 	alias cat='cat'
 fi
+
+alias ls='exa'
+alias ll='exa -l'
+alias la='exa -la'
+alias lt='exa --tree'
+
+alias find='fd'
+alias grep='rg'
 # Remove alias for lf from bash_it
 unalias lf
 
 # Nvim aliases
 alias pde="nvim"
+
+alias docker='podman'  # Docker compatibility
+alias podman-clean='podman system prune -a --volumes'
+
+alias ports='sudo netstat -tulanp'
