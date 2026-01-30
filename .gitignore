@@ -13,3 +13,4 @@ systemd/.config/environment.d/*.conf
 
 # Lock file
 lazy-lock.json
+.aider*
