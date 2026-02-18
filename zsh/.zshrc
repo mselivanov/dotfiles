@@ -74,7 +74,7 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 # ── zoxide ─────────────────────────────────────────────────────────────────────
 # --cmd cd shadows built-in cd so existing muscle memory works
 if command -v zoxide &>/dev/null; then
-  eval "$(zoxide init zsh --cmd cd)"
+  eval "$(zoxide init zsh)"
 fi
 
 # ── ripgrep ────────────────────────────────────────────────────────────────────
@@ -129,13 +129,9 @@ if command -v fdfind &>/dev/null; then
 fi
 
 # ── Aliases — git ──────────────────────────────────────────────────────────────
-alias gblsa='git branch --list --all'
-alias gblsl='git branch --list'
-alias gblsr='git branch --list --remotes'
-alias gfd='git fetch origin dev:dev'
-alias gur='git add . && git commit && git push --set-upstream origin $(git symbolic-ref --short HEAD)'
-alias gxsm='git switch main && git pull'
-
+if ls -l ~/.zsh.alias &>/dev/null; then
+  source ~/.zsh.alias
+fi
 # ── Aliases — ripgrep ──────────────────────────────────────────────────────────
 alias rg='rg --smart-case'
 alias rgh='rg --hidden'
