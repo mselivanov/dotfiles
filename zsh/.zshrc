@@ -2,6 +2,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+bindkey -e
+
 # ── XDG Runtime Dir ────────────────────────────────────────────────────────────
 if [[ -z "$XDG_RUNTIME_DIR" ]]; then
   export XDG_RUNTIME_DIR=/run/user/$UID
@@ -40,8 +42,9 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-history-substring-search
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+bindkey '^ ' autosuggest-accept
+bindkey '^r' history-substring-search-up
+bindkey '^R' history-substring-search-down
 
 # ── Completions ────────────────────────────────────────────────────────────────
 autoload -Uz compinit add-zsh-hook
@@ -129,8 +132,8 @@ if command -v fdfind &>/dev/null; then
 fi
 
 # ── Aliases — git ──────────────────────────────────────────────────────────────
-if ls -l ~/.zsh.alias &>/dev/null; then
-  source ~/.zsh.alias
+if ls -l ~/.git.alias.zsh &>/dev/null; then
+  source ~/.git.alias.zsh
 fi
 # ── Aliases — ripgrep ──────────────────────────────────────────────────────────
 alias rg='rg --smart-case'
