@@ -10,3 +10,7 @@ systemd/.config/environment.d/*.conf
 
 # Log files
 *.log
+
+# Lock file
+lazy-lock.json
+.aider*

@@ -4,6 +4,8 @@ alias gblsl='git branch --list'
 alias gblsr='git branch --list --remotes'
 alias gfd='git fetch origin dev:dev'
 alias gur='git add . && git commit && git push --set-upstream origin $(git symbolic-ref --short HEAD)'
+# g - git, x - extras, sm - sync main
+alias gxsm='git switch main && git pull'
 
 # CLI tools aliases
 if [[ "x$(which fd 2>/dev/null)" != "x" ]]; then

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Install dotfiles using GNU stow
-stow --restow bash tmux starship nvim bash_it zk systemd scripts
+stow --restow zsh tmux starship nvim bash_it zk systemd scripts
 
 # Setup machine-specific configs
 setup_local_configs() {
