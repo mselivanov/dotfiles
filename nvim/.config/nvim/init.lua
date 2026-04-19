@@ -3,6 +3,7 @@ require("config.keymaps")
 require("config.autocmds")
 require("config.lazy")
 require("plugins")
+require("config.lsp")
 
 pcall(function()
 	require("local")
