@@ -25,6 +25,7 @@ fi
 export REPOSITORY_ROOT="${HOME}/repo"
 export ZK_NOTEBOOK_DIR="${HOME}/brain"
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+export no_proxy="api.github.com,copilot-proxy.githubusercontent.com,github.com"
 
 # ── PATH ───────────────────────────────────────────────────────────────────────
 export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH"
@@ -81,7 +82,7 @@ if command -v zoxide &>/dev/null; then
 fi
 
 # ── ripgrep ────────────────────────────────────────────────────────────────────
-export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/config"
+export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/.ripgreprc"
 
 # ── uv ─────────────────────────────────────────────────────────────────────────
 export UV_PYTHON_PREFERENCE=managed

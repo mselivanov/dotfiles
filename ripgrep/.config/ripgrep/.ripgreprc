@@ -1,0 +1,15 @@
+--max-columns=150
+--max-columns-preview
+
+# Search hidden files / directories (e.g. dotfiles) by default
+--hidden
+
+# or
+--glob
+!.git/*
+
+# Set the colors.
+--colors=line:none
+--colors=line:style:bold
+
+--smart-case
