@@ -26,6 +26,7 @@ export REPOSITORY_ROOT="${HOME}/repo"
 export ZK_NOTEBOOK_DIR="${HOME}/brain"
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 export no_proxy="api.github.com,copilot-proxy.githubusercontent.com,github.com"
+export NODE_EXTRA_CA_CERTS="/etc/ssl/certs/ca-certificates.crt"
 
 # ── PATH ───────────────────────────────────────────────────────────────────────
 export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH"

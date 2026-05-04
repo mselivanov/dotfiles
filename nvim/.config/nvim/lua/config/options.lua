@@ -1,3 +1,7 @@
+vim.env.NO_PROXY = "github.com,api.github.com,api.githubcopilot.com,"
+	.. "copilot-proxy.githubusercontent.com,default.exp-tas.com"
+vim.env.NODE_EXTRA_CA_CERTS = "/etc/ssl/certs/ca-certificates.crt"
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.have_nerd_font = true
