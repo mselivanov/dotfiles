@@ -3,7 +3,6 @@ return {
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
 		event = "InsertEnter",
-		dependencies = { "copilotlsp-nvim/copilot-lsp" }, -- optional, for NES
 		config = function()
 			require("copilot").setup({
 				suggestion = {
@@ -19,7 +18,7 @@ return {
 					},
 				},
 				panel = { enabled = false }, -- you have CLI for chat-style exploration
-				nes = { enabled = true, auto_trigger = true },
+				-- nes = { enabled = true, auto_trigger = true },
 			})
 		end,
 	},

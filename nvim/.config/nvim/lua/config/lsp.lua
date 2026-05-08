@@ -7,9 +7,6 @@ vim.lsp.config("*", {
 	),
 })
 
--- Activate servers; per-server overrides are auto-loaded from lsp/<name>.lua
-vim.lsp.enable({ "lua_ls", "ruff", "ty" })
-
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("pde-lsp-attach", { clear = true }),
 	callback = function(event)
