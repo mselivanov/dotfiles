@@ -27,9 +27,15 @@ export ZK_NOTEBOOK_DIR="${HOME}/brain"
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 export no_proxy="api.github.com,copilot-proxy.githubusercontent.com,github.com"
 export NODE_EXTRA_CA_CERTS="/etc/ssl/certs/ca-certificates.crt"
+# For Python requests and other libraries that don't respect NODE_EXTRA_CA_CERTS 
+export REQUESTS_CA_BUNDLE="/etc/ssl/certs/ca-certificates.crt"
+# For OpenSSL-based tools that look for SSL_CERT_FILE
+export SSL_CERT_FILE="/etc/ssl/certs/ca-certificates.crt"
+export JAVA_OPTS=--add-opens=java.base/java.nio=ALL-UNNAMED
 
 # ── PATH ───────────────────────────────────────────────────────────────────────
 export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH"
+export PATH="/usr/local/liquibase:$PATH"
 
 # ── Zinit bootstrap ────────────────────────────────────────────────────────────
 ZINIT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zinit/zinit.git"
