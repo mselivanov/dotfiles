@@ -12,5 +12,5 @@ systemd/.config/environment.d/*.conf
 *.log
 
 # Lock file
-lazy-lock.json
+**/lazy-lock.json
 .aider*
