@@ -35,6 +35,7 @@ export JAVA_OPTS=--add-opens=java.base/java.nio=ALL-UNNAMED
 
 # ── PATH ───────────────────────────────────────────────────────────────────────
 export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH"
+export PATH="$HOME/.cargo/bin/:$PATH"
 export PATH="/usr/local/liquibase:$PATH"
 
 # ── Zinit bootstrap ────────────────────────────────────────────────────────────

@@ -207,6 +207,12 @@ alias gfd='git fetch origin dev:dev'
 alias gur='git add . && git commit && git push --set-upstream origin $(git symbolic-ref --short HEAD)'
 alias gxsm='git switch main && git pull'
 
+# Workmux
+alias wm='workmux'
+alias wma='workmux add -A --with-changes -u --agent copilot_worker -p'
+alias wmaf='workmux add -A --with-changes -u --agent copilot_worker --prompt-file'
+alias wmafs='workmux add -A --with-changes -u --agent copilot_smart --prompt-file'
+
 case $OSTYPE in
 	darwin*)
 		alias gtls="git tag -l | gsort -V"
