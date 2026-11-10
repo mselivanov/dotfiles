@@ -210,8 +210,18 @@ alias gxsm='git switch main && git pull'
 # Workmux
 alias wm='workmux'
 alias wma='workmux add -A --with-changes -u --agent copilot_worker -p'
-alias wmaf='workmux add -A --with-changes -u --agent copilot_worker --prompt-file'
-alias wmafs='workmux add -A --with-changes -u --agent copilot_smart --prompt-file'
+#alias wmaf='workmux add -A --with-changes -u --agent copilot_worker --prompt-file'
+#alias wmafs='workmux add -A --with-changes -u --agent copilot_smart --prompt-file'
+
+function wmaf() {
+  local task_prompt="Implement specification $*"
+  workmux add -A -w -u -a copilot_worker -p "$task_prompt"
+}
+
+function wmafs() {
+  local task_prompt="Implement specification $*"
+  workmux add -A -w -u -a copilot_smart -p "$task_prompt"
+}
 
 case $OSTYPE in
 	darwin*)
