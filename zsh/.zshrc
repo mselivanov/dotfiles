@@ -149,6 +149,20 @@ alias rg='rg --smart-case'
 alias rgh='rg --hidden'
 alias rgp='rg --type py'
 
+# Workmux
+alias wm='workmux'
+alias wma='workmux add -A --with-changes -u --agent copilot_worker -p'
+
+function wmaf() {
+  local task_prompt="Implement specification $*"
+  workmux add -A -w -u -a copilot_worker -p "$task_prompt"
+}
+
+function wmafs() {
+  local task_prompt="Implement specification $*"
+  workmux add -A -w -u -a copilot_smart -p "$task_prompt"
+}
+
 # ── Aliases — uv ───────────────────────────────────────────────────────────────
 alias uvs='uv sync'
 alias uvr='uv run'
