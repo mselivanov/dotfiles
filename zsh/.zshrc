@@ -150,19 +150,44 @@ alias rgh='rg --hidden'
 alias rgp='rg --type py'
 
 # Workmux
-alias wm='workmux'
-alias wma='workmux add -A --with-changes -u --agent copilot_worker -p'
+if command -v workmux &>/dev/null; then
+  eval "$(workmux completions zsh)"
+  alias wm='workmux'
 
-function wmaf() {
-  local task_prompt="Implement specification $*"
-  workmux add -A -w -u -a copilot_worker -p "$task_prompt"
-}
+  function _wmaf_bootstrap() {
+    local spec=$1
+    local branch=$2
+    [[ -f $spec ]] || { print -u2 "No such file: $spec"; return 1 }
+    [[ -n $branch ]] || { print -u2 "No branch name provided"; return 1 }
 
-function wmafs() {
-  local task_prompt="Implement specification $*"
-  workmux add -A -w -u -a copilot_smart -p "$task_prompt"
-}
+    git switch -c "$branch" || return
+    if ! git add -- "$spec" || ! git commit -m "spec: $name"; then
+      git switch - && git branch -D "$branch"
+      return 1
+    fi
+    git switch - || return
+  }
 
+  function wmafs() {
+    local spec=$1
+    local branch=$2
+    _wmaf_bootstrap "$spec" "$branch" || return
+
+    local task_prompt="Implement the specification in $spec"
+    workmux add "$branch" -a copilot_smart -p "$task_prompt"
+  }
+
+  function wmaf() {
+    local spec=$1
+    local branch=$2
+    _wmaf_bootstrap "$spec" "$branch" || return
+
+    local task_prompt="Implement the specification in $spec"
+    workmux add "$branch" -a copilot_worker -p "$task_prompt"
+  }
+
+  compdef wm=workmux
+fi
 # ── Aliases — uv ───────────────────────────────────────────────────────────────
 alias uvs='uv sync'
 alias uvr='uv run'
